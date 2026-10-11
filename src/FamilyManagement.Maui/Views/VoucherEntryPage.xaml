@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.VoucherEntryPage"
+             x:DataType="vm:VoucherEntryViewModel"
+             Style="{StaticResource AppPage}"
+             Title="New Voucher">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="16,10" Spacing="6">
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Type" Style="{StaticResource FieldLabel}" />
+                        <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                            <Picker SelectedIndex="{Binding TypeIndex}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Journal (JV)</x:String>
+                                        <x:String>Payment (PV)</x:String>
+                                        <x:String>Receipt (RV)</x:String>
+                                        <x:String>Contra (CV)</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label Text="Date" Style="{StaticResource FieldLabel}" />
+                        <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                            <DatePicker Date="{Binding VoucherDate}" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Label Text="Narration" Style="{StaticResource FieldLabel}" />
+                <Border Style="{StaticResource InputWrap}">
+                    <Entry Text="{Binding Narration}" Placeholder="What is this transaction for?" />
+                </Border>
+
+                <Label Text="Lines" Style="{StaticResource SectionTitle}" Margin="4,14,0,2" />
+
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Lines}" Spacing="8">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:VoucherLineVm">
+                            <Border Style="{StaticResource Card}" Padding="12,10">
+                                <VerticalStackLayout Spacing="6">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                                            <Picker ItemsSource="{Binding Accounts, Source={RelativeSource AncestorType={x:Type vm:VoucherEntryViewModel}}}"
+                                                    SelectedItem="{Binding Account}" Title="Select account"
+                                                    ItemDisplayBinding="{Binding Name}" />
+                                        </Border>
+                                        <Button Grid.Column="1" Text="✕" FontSize="14" BackgroundColor="Transparent"
+                                                TextColor="{StaticResource Danger}"
+                                                Command="{Binding RemoveLineCommand, Source={RelativeSource AncestorType={x:Type vm:VoucherEntryViewModel}}}"
+                                                CommandParameter="{Binding .}" />
+                                    </Grid>
+                                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                        <Border Style="{StaticResource InputWrap}">
+                                            <Entry Text="{Binding Debit}" Placeholder="Debit" Keyboard="Numeric" />
+                                        </Border>
+                                        <Border Grid.Column="1" Style="{StaticResource InputWrap}">
+                                            <Entry Text="{Binding Credit}" Placeholder="Credit" Keyboard="Numeric" />
+                                        </Border>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Button Text="+ Add Line" Style="{StaticResource OutlineButton}" Command="{Binding AddLineCommand}"
+                        Margin="0,6,0,0" />
+                <BoxView HeightRequest="8" Color="Transparent" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Totals bar -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="12,0,12,10" Padding="16,10">
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="*,*,*">
+                    <VerticalStackLayout Spacing="1">
+                        <Label Text="Debit" Style="{StaticResource MutedText}" />
+                        <Label Text="{Binding TotalDebit, StringFormat='{0:N2}'}" Style="{StaticResource BodyText}"
+                               FontFamily="OpenSansSemibold" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="1">
+                        <Label Text="Credit" Style="{StaticResource MutedText}" />
+                        <Label Text="{Binding TotalCredit, StringFormat='{0:N2}'}" Style="{StaticResource BodyText}"
+                               FontFamily="OpenSansSemibold" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="{Binding BalanceText}" VerticalOptions="Center" HorizontalOptions="End"
+                           Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsBalanced}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource Success}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsBalanced}" Value="False">
+                                <Setter Property="TextColor" Value="{StaticResource Danger}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Grid>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Button Text="Save Draft" Style="{StaticResource OutlineButton}"
+                            Command="{Binding SaveDraftCommand}"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+                    <Button Grid.Column="1" Text="Save &amp; Post" Style="{StaticResource PrimaryButton}" HeightRequest="48"
+                            Command="{Binding SaveAndPostCommand}"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

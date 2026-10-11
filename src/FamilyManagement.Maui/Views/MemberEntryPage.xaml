@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.MemberEntryPage"
+             x:DataType="vm:MemberEntryViewModel"
+             Style="{StaticResource AppPage}"
+             Title="New Member">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,12" Spacing="4">
+            <Label Text="Full Name" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding FullName}" Placeholder="Member's full name" />
+            </Border>
+
+            <Label Text="Username" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding UserName}" Placeholder="Unique username" />
+            </Border>
+
+            <Label Text="Email (optional)" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Email}" Keyboard="Email" Placeholder="member@example.com" />
+            </Border>
+
+            <Label Text="Mobile (optional)" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Mobile}" Keyboard="Telephone" Placeholder="01XXXXXXXXX" />
+            </Border>
+
+            <Label Text="Temporary Password" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Password}" IsPassword="True" Placeholder="At least 8 characters, 1 digit" />
+            </Border>
+
+            <Label Text="Role" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                <Picker ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}"
+                        ItemDisplayBinding="{Binding Name}" Title="Select role" />
+            </Border>
+
+            <Button Text="Create Member" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0"
+                    Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.AccountsPage"
+             x:DataType="vm:AccountsViewModel"
+             Style="{StaticResource AppPage}"
+             Title="Chart of Accounts">
+    <Grid RowDefinitions="Auto,*" Padding="16,8,16,0" RowSpacing="8">
+
+        <VerticalStackLayout Spacing="8">
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Search}" Placeholder="Search accounts…" ClearButtonVisibility="WhileEditing" />
+            </Border>
+            <Label Text="Showing saved data (offline)" Style="{StaticResource MutedText}"
+                   TextColor="{StaticResource Warning}" IsVisible="{Binding IsOfflineData}" />
+        </VerticalStackLayout>
+
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadCommand}"
+                     RefreshColor="{StaticResource Primary}">
+            <CollectionView ItemsSource="{Binding Rows}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="No accounts found." Style="{StaticResource MutedText}" Margin="0,30"
+                           HorizontalOptions="Center" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:AccountRow">
+                        <Grid Padding="0,2">
+                            <Border Style="{StaticResource Card}" Padding="14,10" Margin="{Binding Indent}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding OpenAccountCommand, Source={RelativeSource AncestorType={x:Type vm:AccountsViewModel}}}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Spacing="1">
+                                        <Label Text="{Binding Display}" Style="{StaticResource BodyText}">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsGroup}" Value="True">
+                                                    <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <Label Text="{Binding Node.AccountType}" Style="{StaticResource MutedText}"
+                                               IsVisible="{Binding IsGroup}" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" Text="›" FontSize="20" VerticalOptions="Center"
+                                           Style="{StaticResource MutedText}"
+                                           IsVisible="{Binding IsGroup, Converter={StaticResource InverseBool}}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <BoxView HeightRequest="90" Color="Transparent" />
+                </CollectionView.Footer>
+            </CollectionView>
+        </RefreshView>
+
+        <Button Grid.Row="1" Text="＋" FontSize="26" WidthRequest="60" HeightRequest="60" CornerRadius="30"
+                BackgroundColor="{StaticResource Primary}" TextColor="White"
+                HorizontalOptions="End" VerticalOptions="End" Margin="0,0,8,16"
+                Command="{Binding AddAccountCommand}" IsVisible="{Binding CanCreate}" />
+    </Grid>
+</ContentPage>

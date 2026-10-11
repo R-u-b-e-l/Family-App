@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.AccountEntryPage"
+             x:DataType="vm:AccountEntryViewModel"
+             Style="{StaticResource AppPage}"
+             Title="New Account">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,12" Spacing="4">
+            <Label Text="Parent Group" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Picker ItemsSource="{Binding ParentOptions}" SelectedItem="{Binding SelectedParent}"
+                        ItemDisplayBinding="{Binding Name}" Title="Select parent account" />
+            </Border>
+
+            <Label Text="Account Name" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Name}" Placeholder="e.g. DBBL Savings Account" />
+            </Border>
+
+            <Label Text="Code (optional — auto-generated)" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Code}" Placeholder="e.g. 1122" Keyboard="Numeric" />
+            </Border>
+
+            <Label Text="Description (optional)" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Description}" Placeholder="Notes about this account" />
+            </Border>
+
+            <HorizontalStackLayout Spacing="8" Margin="4,10,0,0">
+                <CheckBox IsChecked="{Binding IsGroup}" Color="{StaticResource Primary}" VerticalOptions="Center" />
+                <Label Text="This is a group (holds sub-accounts, no transactions)"
+                       Style="{StaticResource BodyText}" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Button Text="Create Account" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0"
+                    Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

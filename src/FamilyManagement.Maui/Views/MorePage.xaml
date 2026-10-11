@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.MorePage"
+             x:DataType="vm:MoreViewModel"
+             Style="{StaticResource AppPage}"
+             Title="More">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,12,16,24" Spacing="12">
+
+            <!-- Profile header -->
+            <Border Style="{StaticResource Card}">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenProfileCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Border StrokeThickness="0" StrokeShape="RoundRectangle 26" BackgroundColor="{StaticResource Primary}"
+                            WidthRequest="52" HeightRequest="52">
+                        <Label Text="👤" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Text="{Binding FullName}" Style="{StaticResource SectionTitle}" />
+                        <Label Style="{StaticResource MutedText}">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} · {1}">
+                                    <Binding Path="FamilyName" />
+                                    <Binding Path="RoleText" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="›" FontSize="22" Style="{StaticResource MutedText}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Navigation -->
+            <Border Style="{StaticResource Card}" Padding="6,2">
+                <VerticalStackLayout>
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,13" ColumnSpacing="12"
+                          IsVisible="{Binding CanManageMembers}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenMembersCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="👨‍👩‍👧‍👦" FontSize="18" />
+                        <Label Grid.Column="1" Text="Family Members" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource MutedText}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" IsVisible="{Binding CanManageMembers}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,13" ColumnSpacing="12"
+                          IsVisible="{Binding CanEditSettings}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenFamilySettingsCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="🏠" FontSize="18" />
+                        <Label Grid.Column="1" Text="Family Settings" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource MutedText}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" IsVisible="{Binding CanEditSettings}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,13" ColumnSpacing="12">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenNotificationsCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="🔔" FontSize="18" />
+                        <Label Grid.Column="1" Text="Notifications" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource MutedText}" FontSize="18" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Appearance -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Appearance" Style="{StaticResource SectionTitle}" />
+                    <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                        <Picker SelectedIndex="{Binding ThemeIndex}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>System default</x:String>
+                                    <x:String>Light</x:String>
+                                    <x:String>Dark</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Server -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="API Server" Style="{StaticResource SectionTitle}" />
+                    <Label Text="Where this app connects. Use http://10.0.2.2:5005 for the Android emulator."
+                           Style="{StaticResource MutedText}" />
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Border Style="{StaticResource InputWrap}">
+                            <Entry Text="{Binding ServerUrl}" Keyboard="Url" />
+                        </Border>
+                        <Button Grid.Column="1" Text="Save" Style="{StaticResource OutlineButton}" HeightRequest="44"
+                                Command="{Binding SaveServerUrlCommand}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Sign Out" Style="{StaticResource OutlineButton}" TextColor="{StaticResource Danger}"
+                    BorderColor="{StaticResource Danger}" Command="{Binding SignOutCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

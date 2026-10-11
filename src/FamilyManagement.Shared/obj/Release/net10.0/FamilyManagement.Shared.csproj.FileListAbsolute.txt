@@ -1,0 +1,11 @@
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\bin\Release\net10.0\FamilyManagement.Shared.deps.json
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\bin\Release\net10.0\FamilyManagement.Shared.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\bin\Release\net10.0\FamilyManagement.Shared.pdb
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.GeneratedMSBuildEditorConfig.editorconfig
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.AssemblyInfoInputs.cache
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.AssemblyInfo.cs
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.csproj.CoreCompileInputs.cache
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\refint\FamilyManagement.Shared.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.pdb
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\ref\FamilyManagement.Shared.dll

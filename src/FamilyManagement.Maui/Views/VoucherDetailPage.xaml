@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             x:Class="FamilyManagement.Maui.Views.VoucherDetailPage"
+             x:DataType="vm:VoucherDetailViewModel"
+             Style="{StaticResource AppPage}"
+             Title="Voucher">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,12" Spacing="12">
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{Binding Voucher.VoucherNumber}" Style="{StaticResource SectionTitle}" FontSize="18" />
+                            <Label Style="{StaticResource MutedText}">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} Voucher · {1}">
+                                        <Binding Path="Voucher.VoucherType" Converter="{StaticResource VoucherTypeName}" />
+                                        <Binding Path="Voucher.VoucherDate" Converter="{StaticResource DateOnlyFormat}" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </VerticalStackLayout>
+                        <Border Grid.Column="1" Style="{StaticResource Chip}" VerticalOptions="Start"
+                                BackgroundColor="{Binding Voucher.Status, Converter={StaticResource VoucherStatusColor}}">
+                            <Label Text="{Binding Voucher.Status}" TextColor="White" FontSize="11" />
+                        </Border>
+                    </Grid>
+                    <Label Text="{Binding Voucher.Narration, TargetNullValue='(no narration)'}" Style="{StaticResource BodyText}" />
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Label Style="{StaticResource MutedText}"
+                           Text="{Binding Voucher.CreatedByName, StringFormat='Created by {0}'}" />
+                    <Label Style="{StaticResource MutedText}"
+                           Text="{Binding Voucher.PostedByName, StringFormat='Posted by {0}', TargetNullValue=''}" />
+                    <Label Style="{StaticResource MutedText}"
+                           Text="{Binding Voucher.ReversalOfVoucherNumber, StringFormat='Reversal of {0}', TargetNullValue=''}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Padding="16,12">
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*,80,80" Margin="0,0,0,6">
+                        <Label Text="Account" Style="{StaticResource MutedText}" FontFamily="OpenSansSemibold" />
+                        <Label Grid.Column="1" Text="Debit" Style="{StaticResource MutedText}"
+                               FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                        <Label Grid.Column="2" Text="Credit" Style="{StaticResource MutedText}"
+                               FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                    </Grid>
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Voucher.Lines}" Spacing="6">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="dto:VoucherLineDto">
+                                <Grid ColumnDefinitions="*,80,80">
+                                    <VerticalStackLayout Spacing="0">
+                                        <Label Text="{Binding AccountName}" Style="{StaticResource BodyText}" />
+                                        <Label Text="{Binding AccountCode}" Style="{StaticResource MutedText}" FontSize="11" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" Text="{Binding Debit, Converter={StaticResource ZeroToEmpty}}"
+                                           Style="{StaticResource BodyText}" HorizontalOptions="End" />
+                                    <Label Grid.Column="2" Text="{Binding Credit, Converter={StaticResource ZeroToEmpty}}"
+                                           Style="{StaticResource BodyText}" HorizontalOptions="End" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                    <BoxView Style="{StaticResource Divider}" Margin="0,6" />
+                    <Grid ColumnDefinitions="*,80,80">
+                        <Label Text="Total" Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                        <Label Grid.Column="1" Text="{Binding Voucher.TotalDebit, StringFormat='{0:N2}'}"
+                               Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                        <Label Grid.Column="2" Text="{Binding Voucher.TotalCredit, StringFormat='{0:N2}'}"
+                               Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Post Voucher" Style="{StaticResource PrimaryButton}" Command="{Binding PostCommand}"
+                    IsVisible="{Binding CanPost}" />
+            <Button Text="Reverse Voucher" Style="{StaticResource OutlineButton}" Command="{Binding ReverseCommand}"
+                    IsVisible="{Binding CanReverse}" />
+            <Button Text="Cancel Voucher" Style="{StaticResource OutlineButton}" TextColor="{StaticResource Danger}"
+                    BorderColor="{StaticResource Danger}" Command="{Binding CancelVoucherCommand}"
+                    IsVisible="{Binding CanCancel}" />
+            <Button Text="Delete Draft" Style="{StaticResource OutlineButton}" TextColor="{StaticResource Danger}"
+                    BorderColor="{StaticResource Danger}" Command="{Binding DeleteCommand}"
+                    IsVisible="{Binding CanDelete}" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

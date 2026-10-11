@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             xmlns:controls="clr-namespace:FamilyManagement.Maui.Controls"
+             x:Class="FamilyManagement.Maui.Views.DashboardPage"
+             x:DataType="vm:DashboardViewModel"
+             Style="{StaticResource AppPage}"
+             Shell.NavBarIsVisible="False">
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadCommand}"
+                 RefreshColor="{StaticResource Primary}">
+        <ScrollView>
+            <VerticalStackLayout Padding="16,12,16,24" Spacing="14">
+
+                <!-- Header -->
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="{Binding Greeting}" Style="{StaticResource PageTitle}" FontSize="21" />
+                        <Label Text="{Binding FamilyName}" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" Text="🔔" FontSize="20" BackgroundColor="Transparent"
+                            Command="{Binding OpenNotificationsCommand}" />
+                </Grid>
+
+                <Label Text="Showing saved data (offline)" Style="{StaticResource MutedText}"
+                       TextColor="{StaticResource Warning}" IsVisible="{Binding IsOfflineData}" />
+
+                <!-- Balance hero card -->
+                <Border Style="{StaticResource Card}" BackgroundColor="{StaticResource Primary}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Total Balance (Cash + Bank)" TextColor="#CDEDE3" FontSize="13" />
+                        <Label Text="{Binding Summary.TotalBalance, Converter={StaticResource Money}}"
+                               TextColor="White" FontSize="30" FontFamily="OpenSansSemibold" />
+                        <Grid ColumnDefinitions="*,*" Margin="0,8,0,0">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Cash" TextColor="#CDEDE3" FontSize="12" />
+                                <Label Text="{Binding Summary.CashBalance, Converter={StaticResource Money}}"
+                                       TextColor="White" FontSize="15" FontFamily="OpenSansSemibold" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Bank" TextColor="#CDEDE3" FontSize="12" />
+                                <Label Text="{Binding Summary.BankBalance, Converter={StaticResource Money}}"
+                                       TextColor="White" FontSize="15" FontFamily="OpenSansSemibold" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Month stats -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Border Style="{StaticResource StatCard}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="This Month Income" Style="{StaticResource MutedText}" />
+                            <Label Text="{Binding Summary.CurrentMonthIncome, Converter={StaticResource Money}}"
+                                   Style="{StaticResource AmountText}" TextColor="{StaticResource Success}" FontSize="17" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource StatCard}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="This Month Expense" Style="{StaticResource MutedText}" />
+                            <Label Text="{Binding Summary.CurrentMonthExpense, Converter={StaticResource Money}}"
+                                   Style="{StaticResource AmountText}" TextColor="{StaticResource Danger}" FontSize="17" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Border Style="{StaticResource StatCard}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Net Worth" Style="{StaticResource MutedText}" />
+                            <Label Text="{Binding Summary.NetWorth, Converter={StaticResource Money}}"
+                                   Style="{StaticResource AmountText}" FontSize="17" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource StatCard}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Net Profit (All Time)" Style="{StaticResource MutedText}" />
+                            <Label Text="{Binding Summary.NetProfit, Converter={StaticResource Money}}"
+                                   Style="{StaticResource AmountText}" FontSize="17" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Income vs Expense chart -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="8">
+                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                            <Label Text="Income vs Expense" Style="{StaticResource SectionTitle}" />
+                            <HorizontalStackLayout Grid.Column="1" Spacing="4">
+                                <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="2"
+                                         Color="{StaticResource Success}" VerticalOptions="Center" />
+                                <Label Text="In" Style="{StaticResource MutedText}" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="4">
+                                <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="2"
+                                         Color="{StaticResource Danger}" VerticalOptions="Center" />
+                                <Label Text="Out" Style="{StaticResource MutedText}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <controls:BarChartView ItemsSource="{Binding Monthly}"
+                                               LabelColor="{AppThemeBinding Light={StaticResource TextMutedLight}, Dark={StaticResource TextMutedDark}}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Expense by category -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Expense by Category (This Month)" Style="{StaticResource SectionTitle}" />
+                        <controls:DonutChartView ItemsSource="{Binding ExpenseCategories}"
+                                                 LabelColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Recent transactions -->
+                <Border Style="{StaticResource Card}" Padding="16,12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Recent Transactions" Style="{StaticResource SectionTitle}" Margin="0,0,0,6" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding RecentTransactions}">
+                            <BindableLayout.EmptyView>
+                                <Label Text="No transactions yet. Create your first voucher!"
+                                       Style="{StaticResource MutedText}" Margin="0,10" HorizontalOptions="Center" />
+                            </BindableLayout.EmptyView>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="dto:RecentTransactionDto">
+                                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="0,8" ColumnSpacing="12">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding OpenTransactionCommand, Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}}"
+                                                CommandParameter="{Binding .}" />
+                                        </Grid.GestureRecognizers>
+                                        <Border StrokeThickness="0" StrokeShape="RoundRectangle 10"
+                                                BackgroundColor="{Binding VoucherType, Converter={StaticResource VoucherTypeColor}}"
+                                                WidthRequest="40" HeightRequest="40" Opacity="0.9">
+                                            <Label Text="{Binding VoucherType}" TextColor="White" FontSize="11"
+                                                   FontFamily="OpenSansSemibold" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                            <Label Text="{Binding Narration, TargetNullValue='(no narration)'}"
+                                                   Style="{StaticResource BodyText}" LineBreakMode="TailTruncation" MaxLines="1" />
+                                            <Label Style="{StaticResource MutedText}">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0} · {1}">
+                                                        <Binding Path="VoucherNumber" />
+                                                        <Binding Path="Date" Converter="{StaticResource DateOnlyFormat}" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2" Text="{Binding Amount, Converter={StaticResource Money}}"
+                                               Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="+  New Voucher" Style="{StaticResource PrimaryButton}"
+                        Command="{Binding NewVoucherCommand}" IsVisible="{Binding CanViewVouchers}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.ProfilePage"
+             x:DataType="vm:ProfileViewModel"
+             Style="{StaticResource AppPage}"
+             Title="My Profile">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,12,20,24" Spacing="4">
+
+            <Border Style="{StaticResource Card}" Margin="0,0,0,10">
+                <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                    <Border StrokeThickness="0" StrokeShape="RoundRectangle 34" BackgroundColor="{StaticResource Primary}"
+                            WidthRequest="68" HeightRequest="68" HorizontalOptions="Center">
+                        <Label Text="👤" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Text="{Binding UserName, StringFormat='@{0}'}" Style="{StaticResource MutedText}"
+                           HorizontalOptions="Center" Margin="0,6,0,0" />
+                    <Label Style="{StaticResource MutedText}" HorizontalOptions="Center">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} · {1}">
+                                <Binding Path="FamilyName" />
+                                <Binding Path="RoleText" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Full Name" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding FullName}" />
+            </Border>
+
+            <Label Text="Email" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Email}" Keyboard="Email" />
+            </Border>
+
+            <Label Text="Mobile" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Mobile}" Keyboard="Telephone" />
+            </Border>
+
+            <Label Text="Address" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Address}" />
+            </Border>
+
+            <Button Text="Save Profile" Style="{StaticResource PrimaryButton}" Margin="0,14,0,0"
+                    Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+
+            <BoxView Style="{StaticResource Divider}" Margin="0,20" />
+            <Label Text="Change Password" Style="{StaticResource SectionTitle}" />
+
+            <Label Text="Current Password" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding CurrentPassword}" IsPassword="True" />
+            </Border>
+
+            <Label Text="New Password" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding NewPassword}" IsPassword="True" />
+            </Border>
+
+            <Label Text="Confirm New Password" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding ConfirmPassword}" IsPassword="True" />
+            </Border>
+
+            <Button Text="Change Password" Style="{StaticResource OutlineButton}" Margin="0,14,0,0"
+                    Command="{Binding ChangePasswordCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

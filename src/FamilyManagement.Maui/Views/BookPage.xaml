@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             x:Class="FamilyManagement.Maui.Views.BookPage"
+             x:DataType="vm:BookViewModel"
+             Style="{StaticResource AppPage}"
+             Title="{Binding PageTitle}">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16,8,16,0" RowSpacing="10">
+
+        <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="8">
+            <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                <DatePicker Date="{Binding DateFrom}" />
+            </Border>
+            <Border Grid.Column="1" Style="{StaticResource InputWrap}" Padding="8,0">
+                <DatePicker Date="{Binding DateTo}" />
+            </Border>
+            <Button Grid.Column="2" Text="Go" Style="{StaticResource PrimaryButton}" HeightRequest="44"
+                    WidthRequest="60" Command="{Binding GenerateCommand}" />
+        </Grid>
+
+        <Border Grid.Row="1" Style="{StaticResource Card}" Padding="14,10" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="4">
+                <Label Text="{Binding Report.OpeningBalance, Converter={StaticResource Money}, StringFormat='Opening: {0}'}"
+                       Style="{StaticResource MutedText}" />
+                <Label Grid.Column="1" HorizontalOptions="End"
+                       Text="{Binding Report.ClosingBalance, Converter={StaticResource Money}, StringFormat='Closing: {0}'}"
+                       Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                <Label Grid.Row="1" Text="{Binding Report.TotalReceipts, StringFormat='Receipts: {0:N2}'}"
+                       TextColor="{StaticResource Success}" FontSize="12.5" />
+                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End"
+                       Text="{Binding Report.TotalPayments, StringFormat='Payments: {0:N2}'}"
+                       TextColor="{StaticResource Danger}" FontSize="12.5" />
+            </Grid>
+        </Border>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Rows}" SelectionMode="None"
+                        RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+            <CollectionView.EmptyView>
+                <Label Text="Pick a date range and tap Go." Style="{StaticResource MutedText}"
+                       Margin="0,30" HorizontalOptions="Center" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="dto:BookRowDto">
+                    <Grid Padding="0,3">
+                        <Border Style="{StaticResource Card}" Padding="14,8">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="8">
+                                <Label Text="{Binding AccountName}" Style="{StaticResource BodyText}" />
+                                <Label Grid.Row="1" Style="{StaticResource MutedText}">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} · {1}">
+                                            <Binding Path="VoucherNumber" />
+                                            <Binding Path="Date" Converter="{StaticResource DateOnlyFormat}" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <VerticalStackLayout Grid.Column="1" Grid.RowSpan="2" Spacing="1" HorizontalOptions="End">
+                                    <HorizontalStackLayout Spacing="6" HorizontalOptions="End">
+                                        <Label Text="{Binding Receipt, Converter={StaticResource ZeroToEmpty}}"
+                                               TextColor="{StaticResource Success}" FontSize="13" />
+                                        <Label Text="{Binding Payment, Converter={StaticResource ZeroToEmpty}}"
+                                               TextColor="{StaticResource Danger}" FontSize="13" />
+                                    </HorizontalStackLayout>
+                                    <Label Text="{Binding RunningBalance, StringFormat='Bal: {0:N2}'}"
+                                           Style="{StaticResource MutedText}" HorizontalOptions="End" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

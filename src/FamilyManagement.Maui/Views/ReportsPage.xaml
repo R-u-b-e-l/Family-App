@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FamilyManagement.Maui.Views.ReportsPage"
+             Style="{StaticResource AppPage}"
+             Title="Reports">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,12" Spacing="10">
+            <Label Text="Financial Reports" Style="{StaticResource PageTitle}" FontSize="20" Margin="0,0,0,6" />
+
+            <Border Style="{StaticResource Card}" x:Name="LedgerCard">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Label Text="📒" FontSize="26" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Ledger" Style="{StaticResource SectionTitle}" />
+                        <Label Text="Account-wise transactions with running balance" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="›" FontSize="22" Style="{StaticResource MutedText}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" x:Name="CashBookCard">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Label Text="💵" FontSize="26" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Cash Book" Style="{StaticResource SectionTitle}" />
+                        <Label Text="Cash receipts, payments and balance" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="›" FontSize="22" Style="{StaticResource MutedText}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" x:Name="BankBookCard">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Label Text="🏦" FontSize="26" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Bank Book" Style="{StaticResource SectionTitle}" />
+                        <Label Text="Deposits, withdrawals and bank balance" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="›" FontSize="22" Style="{StaticResource MutedText}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" x:Name="TrialBalanceCard">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Label Text="⚖️" FontSize="26" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Trial Balance" Style="{StaticResource SectionTitle}" />
+                        <Label Text="All account balances — debit vs credit" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="›" FontSize="22" Style="{StaticResource MutedText}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" x:Name="ProfitLossCard">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Label Text="📈" FontSize="26" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Profit &amp; Loss" Style="{StaticResource SectionTitle}" />
+                        <Label Text="Income minus expenses for a period" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="›" FontSize="22" Style="{StaticResource MutedText}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" x:Name="BalanceSheetCard">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Label Text="🏛️" FontSize="26" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Balance Sheet" Style="{StaticResource SectionTitle}" />
+                        <Label Text="Assets, liabilities and equity position" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="›" FontSize="22" Style="{StaticResource MutedText}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

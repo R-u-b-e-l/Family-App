@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FamilyManagement.Maui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:FamilyManagement.Maui.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource CardBgLight}, Dark={StaticResource CardBgDark}}"
+    Shell.TabBarTitleColor="{StaticResource Primary}"
+    Shell.TabBarUnselectedColor="{AppThemeBinding Light={StaticResource TextMutedLight}, Dark={StaticResource TextMutedDark}}">
+
+    <ShellContent Route="splash" ContentTemplate="{DataTemplate views:SplashPage}" Shell.NavBarIsVisible="False" />
+    <ShellContent Route="login" ContentTemplate="{DataTemplate views:LoginPage}" Shell.NavBarIsVisible="False" />
+
+    <TabBar Route="main">
+        <Tab Title="Dashboard" Icon="tab_dashboard.png">
+            <ShellContent Route="dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" />
+        </Tab>
+        <Tab Title="Accounts" Icon="tab_accounts.png">
+            <ShellContent Route="accounts" ContentTemplate="{DataTemplate views:AccountsPage}" />
+        </Tab>
+        <Tab Title="Vouchers" Icon="tab_vouchers.png">
+            <ShellContent Route="vouchers" ContentTemplate="{DataTemplate views:VouchersPage}" />
+        </Tab>
+        <Tab Title="Reports" Icon="tab_reports.png">
+            <ShellContent Route="reports" ContentTemplate="{DataTemplate views:ReportsPage}" />
+        </Tab>
+        <Tab Title="More" Icon="tab_more.png">
+            <ShellContent Route="more" ContentTemplate="{DataTemplate views:MorePage}" />
+        </Tab>
+    </TabBar>
+</Shell>

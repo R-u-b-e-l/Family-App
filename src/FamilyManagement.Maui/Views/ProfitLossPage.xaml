@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             x:Class="FamilyManagement.Maui.Views.ProfitLossPage"
+             x:DataType="vm:ProfitLossViewModel"
+             Style="{StaticResource AppPage}"
+             Title="Profit &amp; Loss">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,8,16,20" Spacing="12">
+
+            <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="8">
+                <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                    <DatePicker Date="{Binding DateFrom}" />
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource InputWrap}" Padding="8,0">
+                    <DatePicker Date="{Binding DateTo}" />
+                </Border>
+                <Button Grid.Column="2" Text="Go" Style="{StaticResource PrimaryButton}" HeightRequest="44"
+                        WidthRequest="60" Command="{Binding GenerateCommand}" />
+            </Grid>
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Net Result" Style="{StaticResource MutedText}" />
+                    <Label Text="{Binding Report.NetProfit, Converter={StaticResource Money}}" FontSize="26"
+                           FontFamily="OpenSansSemibold">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsProfit}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource Success}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsProfit}" Value="False">
+                                <Setter Property="TextColor" Value="{StaticResource Danger}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Income" Style="{StaticResource SectionTitle}" TextColor="{StaticResource Success}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Report.IncomeLines}" Spacing="4">
+                        <BindableLayout.EmptyView>
+                            <Label Text="No income in this period." Style="{StaticResource MutedText}" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="dto:ReportLineDto">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="{Binding AccountName}" Style="{StaticResource BodyText}" />
+                                    <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:N2}'}"
+                                           Style="{StaticResource BodyText}" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Total Income" Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                        <Label Grid.Column="1" Text="{Binding Report.TotalIncome, StringFormat='{0:N2}'}"
+                               Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Expenses" Style="{StaticResource SectionTitle}" TextColor="{StaticResource Danger}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Report.ExpenseLines}" Spacing="4">
+                        <BindableLayout.EmptyView>
+                            <Label Text="No expenses in this period." Style="{StaticResource MutedText}" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="dto:ReportLineDto">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="{Binding AccountName}" Style="{StaticResource BodyText}" />
+                                    <Label Grid.Column="1" Text="{Binding Amount, StringFormat='{0:N2}'}"
+                                           Style="{StaticResource BodyText}" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Total Expenses" Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                        <Label Grid.Column="1" Text="{Binding Report.TotalExpense, StringFormat='{0:N2}'}"
+                               Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

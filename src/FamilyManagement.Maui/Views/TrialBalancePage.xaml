@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             x:Class="FamilyManagement.Maui.Views.TrialBalancePage"
+             x:DataType="vm:TrialBalanceViewModel"
+             Style="{StaticResource AppPage}"
+             Title="Trial Balance">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16,8,16,12" RowSpacing="10">
+
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                <DatePicker Date="{Binding AsOf}" />
+            </Border>
+            <Button Grid.Column="1" Text="Go" Style="{StaticResource PrimaryButton}" HeightRequest="44"
+                    WidthRequest="60" Command="{Binding GenerateCommand}" />
+        </Grid>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Report.Rows}" SelectionMode="None">
+            <CollectionView.Header>
+                <Grid ColumnDefinitions="*,90,90" Padding="14,8">
+                    <Label Text="Account" Style="{StaticResource MutedText}" FontFamily="OpenSansSemibold" />
+                    <Label Grid.Column="1" Text="Debit" Style="{StaticResource MutedText}"
+                           FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                    <Label Grid.Column="2" Text="Credit" Style="{StaticResource MutedText}"
+                           FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.EmptyView>
+                <Label Text="No balances to show yet." Style="{StaticResource MutedText}" Margin="0,30"
+                       HorizontalOptions="Center" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="dto:TrialBalanceRowDto">
+                    <Grid Padding="0,2">
+                        <Border Style="{StaticResource Card}" Padding="14,8">
+                            <Grid ColumnDefinitions="*,90,90">
+                                <VerticalStackLayout Spacing="0">
+                                    <Label Text="{Binding AccountName}" Style="{StaticResource BodyText}" />
+                                    <Label Text="{Binding AccountCode}" Style="{StaticResource MutedText}" FontSize="11" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="{Binding Debit, Converter={StaticResource ZeroToEmpty}}"
+                                       Style="{StaticResource BodyText}" HorizontalOptions="End" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Text="{Binding Credit, Converter={StaticResource ZeroToEmpty}}"
+                                       Style="{StaticResource BodyText}" HorizontalOptions="End" VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Border Grid.Row="2" Style="{StaticResource Card}" Padding="14,10" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Grid ColumnDefinitions="*,90,90">
+                <Label Text="Total" Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                <Label Grid.Column="1" Text="{Binding Report.TotalDebit, StringFormat='{0:N2}'}"
+                       Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                <Label Grid.Column="2" Text="{Binding Report.TotalCredit, StringFormat='{0:N2}'}"
+                       Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

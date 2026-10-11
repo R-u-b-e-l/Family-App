@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FamilyManagement.API/FamilyManagement.API.csproj" />
+    <Project Path="src/FamilyManagement.Application/FamilyManagement.Application.csproj" />
+    <Project Path="src/FamilyManagement.Domain/FamilyManagement.Domain.csproj" />
+    <Project Path="src/FamilyManagement.Infrastructure/FamilyManagement.Infrastructure.csproj" />
+    <Project Path="src/FamilyManagement.Maui/FamilyManagement.Maui.csproj" />
+    <Project Path="src/FamilyManagement.Shared/FamilyManagement.Shared.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FamilyManagement.IntegrationTests/FamilyManagement.IntegrationTests.csproj" />
+    <Project Path="tests/FamilyManagement.UnitTests/FamilyManagement.UnitTests.csproj" />
+  </Folder>
+</Solution>

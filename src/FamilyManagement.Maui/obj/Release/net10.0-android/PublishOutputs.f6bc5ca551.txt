@@ -1,0 +1,4 @@
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Maui\bin\Release\net10.0-android\publish\com.familymanagement.app-Signed.aab
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Maui\bin\Release\net10.0-android\publish\com.familymanagement.app.aab
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Maui\bin\Release\net10.0-android\publish\com.familymanagement.app-Signed.apk
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Maui\bin\Release\net10.0-android\publish\_Microsoft.Android.Resource.Designer.dll

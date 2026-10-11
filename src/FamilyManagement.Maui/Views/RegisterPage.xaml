@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.RegisterPage"
+             x:DataType="vm:RegisterViewModel"
+             Style="{StaticResource AppPage}"
+             Title="Create Family Account">
+    <ScrollView>
+        <VerticalStackLayout Padding="24,16" Spacing="4">
+            <Label Text="Start your family" Style="{StaticResource PageTitle}" />
+            <Label Text="You will be the family admin and can invite members later."
+                   Style="{StaticResource MutedText}" Margin="0,0,0,16" />
+
+            <Label Text="Family Name" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding FamilyName}" Placeholder="e.g. Mahmud Family" />
+            </Border>
+
+            <Label Text="Your Full Name" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding AdminFullName}" Placeholder="e.g. Rubel Mahmud" />
+            </Border>
+
+            <Label Text="Email" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Email}" Placeholder="you@example.com" Keyboard="Email" />
+            </Border>
+
+            <Label Text="Mobile" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Mobile}" Placeholder="01XXXXXXXXX" Keyboard="Telephone" />
+            </Border>
+
+            <Label Text="Username" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding UserName}" Placeholder="Pick a username" />
+            </Border>
+
+            <Label Text="Password" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding Password}" Placeholder="At least 8 characters, 1 digit" IsPassword="True" />
+            </Border>
+
+            <Label Text="Confirm Password" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}">
+                <Entry Text="{Binding ConfirmPassword}" Placeholder="Repeat the password" IsPassword="True" />
+            </Border>
+
+            <Button Text="Create Family Account" Style="{StaticResource PrimaryButton}"
+                    Command="{Binding RegisterCommand}" Margin="0,16,0,0"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+            <Button Text="I already have an account" Style="{StaticResource LinkButton}"
+                    Command="{Binding BackToLoginCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

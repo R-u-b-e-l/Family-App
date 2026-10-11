@@ -1,0 +1,672 @@
+2026-10-11 17:05:13.720 +06:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-10-11 17:05:13.760 +06:00 [FTL] The API terminated unexpectedly
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.<Main>$(String[] args) in G:\Rubel Mahmud\Family App\src\FamilyManagement.API\Program.cs:line 175
+2026-10-11 17:05:57.433 +06:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-10-11 17:05:57.466 +06:00 [FTL] The API terminated unexpectedly
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.<Main>$(String[] args) in G:\Rubel Mahmud\Family App\src\FamilyManagement.API\Program.cs:line 175
+2026-10-11 17:10:44.807 +06:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-10-11 17:10:44.846 +06:00 [FTL] The API terminated unexpectedly
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.<Main>$(String[] args) in G:\Rubel Mahmud\Family App\src\FamilyManagement.API\Program.cs:line 175
+2026-10-11 17:11:57.883 +06:00 [INF] Now listening on: http://localhost:5005
+2026-10-11 17:11:57.911 +06:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-11 17:11:57.912 +06:00 [INF] Hosting environment: Development
+2026-10-11 17:11:57.913 +06:00 [INF] Content root path: G:\Rubel Mahmud\Family App\src\FamilyManagement.API
+2026-10-11 17:12:03.263 +06:00 [INF] Application is shutting down...
+2026-10-11 17:12:16.455 +06:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-10-11 17:12:16.488 +06:00 [FTL] The API terminated unexpectedly
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5005: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.<Main>$(String[] args) in G:\Rubel Mahmud\Family App\src\FamilyManagement.API\Program.cs:line 175
+2026-10-11 17:18:48.142 +06:00 [INF] Now listening on: http://0.0.0.0:5005
+2026-10-11 17:18:48.169 +06:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-10-11 17:18:48.170 +06:00 [INF] Hosting environment: Production
+2026-10-11 17:18:48.171 +06:00 [INF] Content root path: G:\Rubel Mahmud\Family App\src\FamilyManagement.API
+2026-10-11 17:19:02.069 +06:00 [WRN] Failed to determine the https port for redirect.
+2026-10-11 17:19:02.300 +06:00 [INF] HTTP GET /health responded 200 in 232.2979 ms
+2026-10-11 17:19:11.841 +06:00 [INF] HTTP GET /health responded 200 in 3.9120 ms
+2026-10-11 17:33:12.609 +06:00 [INF] HTTP POST /api/v1/auth/register-family responded 400 in 596.2219 ms
+2026-10-11 17:33:16.211 +06:00 [INF] HTTP POST /api/v1/auth/register-family responded 400 in 8.9207 ms
+2026-10-11 17:33:19.351 +06:00 [INF] HTTP POST /api/v1/auth/register-family responded 400 in 19.4597 ms
+2026-10-11 17:33:49.912 +06:00 [WRN] Entity 'AppUser' has a global query filter defined and is the required end of a relationship with the entity 'OtpCode'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-10-11 17:33:49.913 +06:00 [WRN] Entity 'AppUser' has a global query filter defined and is the required end of a relationship with the entity 'RefreshToken'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-10-11 17:33:50.947 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 17:33:51.039 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 17:33:51.219 +06:00 [INF] HTTP POST /api/v1/auth/register-family responded 200 in 1871.0928 ms
+2026-10-11 17:33:56.077 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 47.7166 ms
+2026-10-11 17:34:00.313 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 56.0371 ms
+2026-10-11 17:34:15.724 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 24.3827 ms
+2026-10-11 17:34:53.760 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 5.9865 ms
+2026-10-11 17:34:59.920 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 6.0227 ms
+2026-10-11 17:37:33.356 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 61.2508 ms
+2026-10-11 17:44:05.996 +06:00 [INF] HTTP POST /api/v1/auth/login responded 200 in 130.1465 ms
+2026-10-11 17:44:35.696 +06:00 [INF] HTTP POST /api/v1/auth/login responded 200 in 58.0103 ms
+2026-10-11 17:44:56.352 +06:00 [INF] HTTP POST /api/v1/auth/login responded 200 in 60.2170 ms
+2026-10-11 17:45:29.719 +06:00 [INF] HTTP POST /api/v1/auth/login responded 200 in 81.9823 ms
+2026-10-11 17:54:40.823 +06:00 [INF] HTTP POST /api/v1/auth/login responded 200 in 82.3168 ms
+2026-10-11 17:54:42.159 +06:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-10-11 17:54:42.179 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 209.4999 ms
+2026-10-11 17:54:42.265 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 30.3770 ms
+2026-10-11 17:54:42.405 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 59.9339 ms
+2026-10-11 17:54:42.458 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 20.6679 ms
+2026-10-11 17:55:02.384 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 33.3791 ms
+2026-10-11 17:55:05.193 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 51.3306 ms
+2026-10-11 17:55:30.147 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 2.3860 ms
+2026-10-11 17:55:30.204 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 13.7102 ms
+2026-10-11 17:55:30.227 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.9392 ms
+2026-10-11 17:55:30.534 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.7665 ms
+2026-10-11 17:55:50.568 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 1.8911 ms
+2026-10-11 17:56:01.298 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 42.1003 ms
+2026-10-11 17:56:01.539 +06:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-10-11 17:56:01.556 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 73.4663 ms
+2026-10-11 17:56:14.500 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 16.9448 ms
+2026-10-11 17:56:19.894 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 0.6891 ms
+2026-10-11 17:57:07.696 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 208.0205 ms
+2026-10-11 17:57:07.925 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 17.8384 ms
+2026-10-11 17:57:08.956 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 1.6920 ms
+2026-10-11 17:57:10.216 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 3.3856 ms
+2026-10-11 17:57:10.286 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 3.4329 ms
+2026-10-11 17:57:11.815 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 6.6843 ms
+2026-10-11 17:57:19.031 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 2.5489 ms
+2026-10-11 17:57:21.731 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 11.4102 ms
+2026-10-11 17:57:37.392 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 4.5390 ms
+2026-10-11 17:57:44.404 +06:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-10-11 17:57:44.421 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 44.0606 ms
+2026-10-11 17:57:45.831 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 4.1004 ms
+2026-10-11 17:57:47.679 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 2.7517 ms
+2026-10-11 17:57:48.622 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 3.1495 ms
+2026-10-11 17:57:51.611 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 11.3236 ms
+2026-10-11 17:57:52.429 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 6.8133 ms
+2026-10-11 17:57:57.131 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 3.1909 ms
+2026-10-11 17:57:57.696 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 5.1921 ms
+2026-10-11 17:58:00.000 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 39.0547 ms
+2026-10-11 17:58:01.181 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 3.2859 ms
+2026-10-11 17:58:09.729 +06:00 [INF] HTTP GET /api/v1/users responded 200 in 72.5107 ms
+2026-10-11 17:58:22.729 +06:00 [INF] HTTP GET /api/v1/users responded 200 in 14.7649 ms
+2026-10-11 17:58:26.369 +06:00 [INF] HTTP GET /api/v1/profile responded 200 in 20.9012 ms
+2026-10-11 17:58:29.774 +06:00 [INF] HTTP GET /api/v1/profile responded 200 in 2.5738 ms
+2026-10-11 17:58:52.766 +06:00 [INF] HTTP GET /api/v1/profile responded 200 in 4.9521 ms
+2026-10-11 17:59:01.476 +06:00 [INF] HTTP GET /api/v1/families/settings responded 200 in 22.5591 ms
+2026-10-11 17:59:24.135 +06:00 [INF] HTTP GET /api/v1/notifications responded 200 in 25.3191 ms
+2026-10-11 17:59:33.042 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 1.9384 ms
+2026-10-11 17:59:33.086 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 8.9701 ms
+2026-10-11 17:59:33.105 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 7.3408 ms
+2026-10-11 17:59:33.117 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.7795 ms
+2026-10-11 17:59:48.807 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 6.7561 ms
+2026-10-11 17:59:50.821 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 5.9004 ms
+2026-10-11 18:00:40.137 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 10.5486 ms
+2026-10-11 18:00:42.445 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 9.3572 ms
+2026-10-11 18:04:13.675 +06:00 [INF] HTTP POST /api/v1/vouchers responded 400 in 45.4458 ms
+2026-10-11 18:04:17.016 +06:00 [INF] HTTP POST /api/v1/vouchers responded 400 in 2.1971 ms
+2026-10-11 18:04:58.425 +06:00 [INF] HTTP POST /api/v1/vouchers responded 400 in 33.0132 ms
+2026-10-11 18:05:01.574 +06:00 [INF] HTTP POST /api/v1/vouchers responded 400 in 6.5559 ms
+2026-10-11 18:15:37.567 +06:00 [INF] HTTP GET /api/v1/vouchers responded 401 in 5.6960 ms
+2026-10-11 18:15:37.794 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 22.8699 ms
+2026-10-11 18:15:38.001 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 11.5791 ms
+2026-10-11 18:15:39.526 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 7.3698 ms
+2026-10-11 18:15:43.451 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 0.4974 ms
+2026-10-11 18:15:45.439 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 18.1018 ms
+2026-10-11 18:15:45.522 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 5.7624 ms
+2026-10-11 18:15:45.552 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.1982 ms
+2026-10-11 18:15:45.581 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 10.6989 ms
+2026-10-11 18:15:49.114 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 7.5826 ms
+2026-10-11 18:16:13.297 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 1.0425 ms
+2026-10-11 18:16:13.358 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 5.2559 ms
+2026-10-11 18:16:13.400 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.1962 ms
+2026-10-11 18:16:13.432 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.3401 ms
+2026-10-11 18:24:32.724 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 19.8316 ms
+2026-10-11 18:28:06.377 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 17.6114 ms
+2026-10-11 18:28:07.624 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 11.2143 ms
+2026-10-11 18:28:07.697 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 6.1474 ms
+2026-10-11 18:28:07.732 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 8.4110 ms
+2026-10-11 18:28:07.772 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.6777 ms
+2026-10-11 18:28:10.441 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 10.4014 ms
+2026-10-11 18:31:43.821 +06:00 [INF] HTTP POST /api/v1/vouchers responded 200 in 173.5072 ms
+2026-10-11 18:31:43.989 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:31:44.007 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:31:44.014 +06:00 [INF] HTTP POST /api/v1/vouchers/d5e96352-843f-4833-8813-8b742e405718/post responded 200 in 108.7914 ms
+2026-10-11 18:31:44.129 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 21.6059 ms
+2026-10-11 18:31:44.201 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 29.6534 ms
+2026-10-11 18:31:44.229 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.3943 ms
+2026-10-11 18:31:44.251 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.0496 ms
+2026-10-11 18:31:58.242 +06:00 [INF] HTTP GET /api/v1/vouchers/d5e96352-843f-4833-8813-8b742e405718 responded 200 in 9.6941 ms
+2026-10-11 18:32:16.610 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 1.4133 ms
+2026-10-11 18:32:16.640 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 7.9766 ms
+2026-10-11 18:32:16.670 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 12.4409 ms
+2026-10-11 18:32:16.704 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.6066 ms
+2026-10-11 18:32:46.238 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 8.5244 ms
+2026-10-11 18:32:56.180 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.5057 ms
+2026-10-11 18:32:56.207 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 5.0012 ms
+2026-10-11 18:32:56.278 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.3320 ms
+2026-10-11 18:32:56.306 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 0.9434 ms
+2026-10-11 18:33:01.445 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 1.0921 ms
+2026-10-11 18:33:06.507 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 9.0354 ms
+2026-10-11 18:33:11.434 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 0.4803 ms
+2026-10-11 18:33:24.261 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 21.8820 ms
+2026-10-11 18:33:32.732 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 10.6197 ms
+2026-10-11 18:33:34.578 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 9.4044 ms
+2026-10-11 18:33:35.429 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 10.0593 ms
+2026-10-11 18:33:58.548 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.5623 ms
+2026-10-11 18:33:58.592 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 7.7721 ms
+2026-10-11 18:33:58.628 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 20.0577 ms
+2026-10-11 18:33:58.679 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 7.8766 ms
+2026-10-11 18:34:14.195 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8709 ms
+2026-10-11 18:34:14.219 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 4.3070 ms
+2026-10-11 18:34:14.246 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 4.5360 ms
+2026-10-11 18:34:14.551 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.0141 ms
+2026-10-11 18:34:15.783 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8919 ms
+2026-10-11 18:34:15.801 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.3675 ms
+2026-10-11 18:34:15.814 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 3.1360 ms
+2026-10-11 18:34:15.829 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.5356 ms
+2026-10-11 18:34:17.417 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 1.0632 ms
+2026-10-11 18:34:17.436 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 4.5174 ms
+2026-10-11 18:34:17.451 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.4722 ms
+2026-10-11 18:34:17.462 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 0.8121 ms
+2026-10-11 18:34:28.655 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 9.7500 ms
+2026-10-11 18:34:31.599 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 6.3739 ms
+2026-10-11 18:39:59.107 +06:00 [INF] HTTP POST /api/v1/vouchers responded 200 in 36.7076 ms
+2026-10-11 18:39:59.180 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:39:59.187 +06:00 [INF] HTTP POST /api/v1/vouchers/1c2633a3-a8c3-40e9-ade9-06d4f89a016c/post responded 200 in 32.2239 ms
+2026-10-11 18:39:59.255 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 7.7876 ms
+2026-10-11 18:40:03.991 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 14.4534 ms
+2026-10-11 18:40:04.132 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 11.5205 ms
+2026-10-11 18:40:04.175 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 7.6106 ms
+2026-10-11 18:40:04.222 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 6.6553 ms
+2026-10-11 18:40:06.102 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.2937 ms
+2026-10-11 18:40:06.117 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.6434 ms
+2026-10-11 18:40:06.133 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 4.6284 ms
+2026-10-11 18:40:06.148 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.2719 ms
+2026-10-11 18:40:20.155 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 1.8683 ms
+2026-10-11 18:40:23.408 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 19.2088 ms
+2026-10-11 18:40:36.929 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 1.5398 ms
+2026-10-11 18:40:39.007 +06:00 [INF] HTTP GET /api/v1/vouchers/1c2633a3-a8c3-40e9-ade9-06d4f89a016c responded 200 in 4.8914 ms
+2026-10-11 18:41:00.579 +06:00 [INF] HTTP POST /api/v1/vouchers/1c2633a3-a8c3-40e9-ade9-06d4f89a016c/cancel responded 200 in 35.2117 ms
+2026-10-11 18:41:04.236 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 11.5355 ms
+2026-10-11 18:41:04.270 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 5.7666 ms
+2026-10-11 18:41:04.302 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 15.4223 ms
+2026-10-11 18:41:04.331 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.7083 ms
+2026-10-11 18:41:05.663 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 1.1597 ms
+2026-10-11 18:41:05.679 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.2661 ms
+2026-10-11 18:41:05.693 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 3.8627 ms
+2026-10-11 18:41:05.709 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.1436 ms
+2026-10-11 18:41:19.840 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 1.4249 ms
+2026-10-11 18:41:21.808 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8813 ms
+2026-10-11 18:41:21.846 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.3417 ms
+2026-10-11 18:41:21.861 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.2355 ms
+2026-10-11 18:41:21.875 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.0698 ms
+2026-10-11 18:41:27.921 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 6.1537 ms
+2026-10-11 18:41:30.603 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 7.0960 ms
+2026-10-11 18:42:38.750 +06:00 [INF] HTTP POST /api/v1/vouchers responded 200 in 27.6105 ms
+2026-10-11 18:42:38.777 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:42:38.781 +06:00 [INF] HTTP POST /api/v1/vouchers/b204295c-c996-478e-a9d1-5ab08f1b159f/post responded 200 in 19.0413 ms
+2026-10-11 18:42:38.812 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 15.5754 ms
+2026-10-11 18:42:41.750 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 15.7857 ms
+2026-10-11 18:42:41.795 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 11.3171 ms
+2026-10-11 18:42:41.816 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.5934 ms
+2026-10-11 18:42:41.849 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 11.5511 ms
+2026-10-11 18:42:43.174 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.9160 ms
+2026-10-11 18:42:43.189 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.1382 ms
+2026-10-11 18:42:43.199 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.1558 ms
+2026-10-11 18:42:43.211 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.0868 ms
+2026-10-11 18:42:47.010 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8671 ms
+2026-10-11 18:42:47.025 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.1315 ms
+2026-10-11 18:42:47.037 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 3.9885 ms
+2026-10-11 18:42:47.055 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.3652 ms
+2026-10-11 18:42:49.538 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.4192 ms
+2026-10-11 18:42:49.559 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.2754 ms
+2026-10-11 18:42:49.573 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 4.5897 ms
+2026-10-11 18:42:49.592 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.1725 ms
+2026-10-11 18:43:01.686 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 2.4939 ms
+2026-10-11 18:43:03.219 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 14.9780 ms
+2026-10-11 18:47:36.144 +06:00 [INF] HTTP POST /api/v1/vouchers responded 401 in 3.0514 ms
+2026-10-11 18:47:36.306 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 39.3916 ms
+2026-10-11 18:47:36.434 +06:00 [INF] HTTP POST /api/v1/vouchers responded 400 in 10.5058 ms
+2026-10-11 18:47:40.742 +06:00 [INF] HTTP POST /api/v1/vouchers responded 400 in 5.6454 ms
+2026-10-11 18:48:02.401 +06:00 [INF] HTTP POST /api/v1/vouchers responded 200 in 28.7492 ms
+2026-10-11 18:48:02.419 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:48:02.423 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:48:02.428 +06:00 [INF] HTTP POST /api/v1/vouchers/4dad7bf2-c087-44f4-adb9-102e6aaf6668/post responded 200 in 15.8404 ms
+2026-10-11 18:48:02.451 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 4.9326 ms
+2026-10-11 18:48:06.575 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 9.4934 ms
+2026-10-11 18:48:06.599 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 6.3060 ms
+2026-10-11 18:48:06.648 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 23.2002 ms
+2026-10-11 18:48:06.685 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 10.6943 ms
+2026-10-11 18:48:09.842 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.9167 ms
+2026-10-11 18:48:09.856 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 0.9613 ms
+2026-10-11 18:48:09.873 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 4.7989 ms
+2026-10-11 18:48:09.888 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.8337 ms
+2026-10-11 18:49:20.882 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 27.1406 ms
+2026-10-11 18:49:28.580 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 4.8488 ms
+2026-10-11 18:49:38.889 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.3410 ms
+2026-10-11 18:49:38.925 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 12.6188 ms
+2026-10-11 18:49:38.947 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.4388 ms
+2026-10-11 18:49:38.970 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 10.4174 ms
+2026-10-11 18:49:40.329 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.2937 ms
+2026-10-11 18:49:40.409 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 47.2186 ms
+2026-10-11 18:49:40.443 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 8.7977 ms
+2026-10-11 18:49:40.456 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.9286 ms
+2026-10-11 18:49:44.315 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 13.5183 ms
+2026-10-11 18:49:47.207 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 6.1347 ms
+2026-10-11 18:49:51.140 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 2.5184 ms
+2026-10-11 18:49:59.763 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 17.1262 ms
+2026-10-11 18:50:00.735 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 3.9280 ms
+2026-10-11 18:50:01.313 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 9.8299 ms
+2026-10-11 18:50:11.015 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 11.9941 ms
+2026-10-11 18:50:14.321 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 19.2711 ms
+2026-10-11 18:50:42.759 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 11.1865 ms
+2026-10-11 18:50:49.494 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 70.9309 ms
+2026-10-11 18:50:50.471 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 21.3551 ms
+2026-10-11 18:50:55.057 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 2.8440 ms
+2026-10-11 18:50:56.150 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 2.6708 ms
+2026-10-11 18:50:59.489 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 10.1003 ms
+2026-10-11 18:51:01.927 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 5.9986 ms
+2026-10-11 18:51:04.179 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 4.2576 ms
+2026-10-11 18:51:07.754 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 27.3004 ms
+2026-10-11 18:51:08.852 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 4.7088 ms
+2026-10-11 18:51:09.826 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 4.4308 ms
+2026-10-11 18:51:22.944 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 5.0258 ms
+2026-10-11 18:51:23.813 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 1.2434 ms
+2026-10-11 18:51:49.563 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 4.8362 ms
+2026-10-11 18:51:56.845 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 11.7661 ms
+2026-10-11 18:52:04.872 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 12.0869 ms
+2026-10-11 18:52:06.275 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 3.6935 ms
+2026-10-11 18:52:07.598 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 5.4893 ms
+2026-10-11 18:52:08.304 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 3.8551 ms
+2026-10-11 18:52:15.951 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 5.0529 ms
+2026-10-11 18:52:16.676 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 5.0080 ms
+2026-10-11 18:52:17.106 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 5.6542 ms
+2026-10-11 18:52:17.397 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 4.8042 ms
+2026-10-11 18:52:17.606 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 4.4016 ms
+2026-10-11 18:52:17.786 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 5.4985 ms
+2026-10-11 18:52:17.971 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 2.5041 ms
+2026-10-11 18:52:18.119 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 1.9074 ms
+2026-10-11 18:52:18.246 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 1.4927 ms
+2026-10-11 18:52:18.365 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 1.4299 ms
+2026-10-11 18:52:22.208 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 21.2888 ms
+2026-10-11 18:52:23.864 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 4.6252 ms
+2026-10-11 18:52:24.778 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 5.3021 ms
+2026-10-11 18:52:25.290 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 4.9824 ms
+2026-10-11 18:52:31.999 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 1.5629 ms
+2026-10-11 18:52:32.668 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 4.4311 ms
+2026-10-11 18:52:32.928 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 1.4174 ms
+2026-10-11 18:52:33.139 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 5.5061 ms
+2026-10-11 18:52:33.253 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 3.3614 ms
+2026-10-11 18:52:35.910 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 2.2855 ms
+2026-10-11 18:52:36.903 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 2.2405 ms
+2026-10-11 18:52:40.404 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8815 ms
+2026-10-11 18:52:40.449 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 11.5931 ms
+2026-10-11 18:52:40.479 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 17.4817 ms
+2026-10-11 18:52:40.504 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.4306 ms
+2026-10-11 18:52:58.855 +06:00 [INF] HTTP GET /api/v1/vouchers/4dad7bf2-c087-44f4-adb9-102e6aaf6668 responded 200 in 21.7121 ms
+2026-10-11 18:53:00.340 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.2838 ms
+2026-10-11 18:53:00.383 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 7.3927 ms
+2026-10-11 18:53:00.415 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.6469 ms
+2026-10-11 18:53:00.450 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.4081 ms
+2026-10-11 18:53:01.237 +06:00 [INF] HTTP GET /api/v1/vouchers/b204295c-c996-478e-a9d1-5ab08f1b159f responded 200 in 12.9082 ms
+2026-10-11 18:53:09.663 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 10.0922 ms
+2026-10-11 18:53:09.685 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 5.9492 ms
+2026-10-11 18:53:09.703 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.3627 ms
+2026-10-11 18:53:09.717 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.3631 ms
+2026-10-11 18:53:13.067 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.3667 ms
+2026-10-11 18:53:13.089 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 10.1686 ms
+2026-10-11 18:53:13.100 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.4568 ms
+2026-10-11 18:53:13.118 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.6428 ms
+2026-10-11 18:53:22.634 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.4504 ms
+2026-10-11 18:53:22.672 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.3934 ms
+2026-10-11 18:53:22.690 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.6120 ms
+2026-10-11 18:53:22.702 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.3564 ms
+2026-10-11 18:53:49.614 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 16.5140 ms
+2026-10-11 18:53:58.868 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 20.4819 ms
+2026-10-11 18:54:00.071 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 9.7766 ms
+2026-10-11 18:54:01.230 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 3.0881 ms
+2026-10-11 18:54:17.791 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 25.5501 ms
+2026-10-11 18:54:19.313 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 11.1848 ms
+2026-10-11 18:54:34.421 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 12.1415 ms
+2026-10-11 18:55:03.349 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 1.4786 ms
+2026-10-11 18:55:06.220 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 8.6620 ms
+2026-10-11 18:55:11.998 +06:00 [INF] HTTP GET /api/v1/reports/cashbook responded 200 in 53.3795 ms
+2026-10-11 18:55:14.664 +06:00 [INF] HTTP GET /api/v1/reports/bankbook responded 200 in 48.3681 ms
+2026-10-11 18:55:16.905 +06:00 [INF] HTTP GET /api/v1/reports/trial-balance responded 200 in 13.0258 ms
+2026-10-11 18:55:21.116 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 7.5891 ms
+2026-10-11 18:55:22.774 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 1.8703 ms
+2026-10-11 18:55:26.191 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 7.9216 ms
+2026-10-11 18:55:27.601 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 5.1284 ms
+2026-10-11 18:55:28.342 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 4.9579 ms
+2026-10-11 18:55:34.658 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 9.4279 ms
+2026-10-11 18:55:50.913 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 10.9794 ms
+2026-10-11 18:55:50.987 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 12.4537 ms
+2026-10-11 18:55:52.914 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 1.0610 ms
+2026-10-11 18:55:55.103 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 2.2528 ms
+2026-10-11 18:55:55.178 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 2.5988 ms
+2026-10-11 18:55:56.976 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 0.4733 ms
+2026-10-11 18:56:01.278 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 8.6653 ms
+2026-10-11 18:56:01.468 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 10.8138 ms
+2026-10-11 18:56:02.839 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 11.0186 ms
+2026-10-11 18:56:03.982 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 7.2836 ms
+2026-10-11 18:56:05.200 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 8.2131 ms
+2026-10-11 18:56:05.266 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 3.5208 ms
+2026-10-11 18:56:06.464 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 10.2586 ms
+2026-10-11 18:56:07.326 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 0.9161 ms
+2026-10-11 18:56:19.434 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 0.9214 ms
+2026-10-11 18:56:23.299 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 18.3460 ms
+2026-10-11 18:56:23.386 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 22.0951 ms
+2026-10-11 18:56:26.462 +06:00 [INF] HTTP GET /api/v1/accounts/tree responded 200 in 0.3620 ms
+2026-10-11 18:56:52.252 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 9.9550 ms
+2026-10-11 18:56:55.602 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.3568 ms
+2026-10-11 18:56:55.637 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 5.4361 ms
+2026-10-11 18:56:55.660 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.4074 ms
+2026-10-11 18:56:55.697 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.5766 ms
+2026-10-11 18:57:12.758 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 5.9134 ms
+2026-10-11 18:57:14.910 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 2.2023 ms
+2026-10-11 18:59:35.939 +06:00 [INF] HTTP POST /api/v1/vouchers responded 200 in 34.3091 ms
+2026-10-11 18:59:36.199 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:59:36.205 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 18:59:36.223 +06:00 [INF] HTTP POST /api/v1/vouchers/48d026b7-e425-42f7-99e7-1903f0c54f3c/post responded 200 in 35.6126 ms
+2026-10-11 18:59:36.274 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 7.2405 ms
+2026-10-11 18:59:41.055 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 21.2496 ms
+2026-10-11 18:59:41.072 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 6.3789 ms
+2026-10-11 18:59:41.096 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.9319 ms
+2026-10-11 18:59:41.108 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.4900 ms
+2026-10-11 18:59:42.501 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.2665 ms
+2026-10-11 18:59:42.523 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 4.1287 ms
+2026-10-11 18:59:42.543 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 3.2248 ms
+2026-10-11 18:59:42.555 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.0944 ms
+2026-10-11 18:59:52.677 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.2898 ms
+2026-10-11 18:59:52.694 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 4.0189 ms
+2026-10-11 18:59:52.703 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 0.9174 ms
+2026-10-11 18:59:52.720 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.3986 ms
+2026-10-11 19:00:29.759 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 1.5054 ms
+2026-10-11 19:00:29.773 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 2.9008 ms
+2026-10-11 19:00:29.785 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.2057 ms
+2026-10-11 19:00:29.800 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.7203 ms
+2026-10-11 19:00:57.509 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 18.6836 ms
+2026-10-11 19:00:58.902 +06:00 [INF] HTTP GET /api/v1/reports/balance-sheet responded 200 in 1.4150 ms
+2026-10-11 19:01:01.692 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 7.9928 ms
+2026-10-11 19:01:02.671 +06:00 [INF] HTTP GET /api/v1/reports/profit-loss responded 200 in 1.3245 ms
+2026-10-11 19:01:05.831 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8837 ms
+2026-10-11 19:01:05.968 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 11.5923 ms
+2026-10-11 19:01:06.001 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.2971 ms
+2026-10-11 19:01:06.016 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.2125 ms
+2026-10-11 19:01:27.914 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.9435 ms
+2026-10-11 19:01:27.934 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 4.2442 ms
+2026-10-11 19:01:27.991 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 4.5702 ms
+2026-10-11 19:01:28.006 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.0156 ms
+2026-10-11 19:01:28.658 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8613 ms
+2026-10-11 19:01:28.673 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 4.2746 ms
+2026-10-11 19:01:28.686 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 0.8476 ms
+2026-10-11 19:01:28.702 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.1539 ms
+2026-10-11 19:01:29.460 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 17.0988 ms
+2026-10-11 19:01:32.453 +06:00 [INF] HTTP GET /api/v1/vouchers/48d026b7-e425-42f7-99e7-1903f0c54f3c responded 200 in 17.2271 ms
+2026-10-11 19:01:37.700 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 19:01:37.716 +06:00 [INF] HTTP POST /api/v1/vouchers/48d026b7-e425-42f7-99e7-1903f0c54f3c/reverse responded 200 in 45.3759 ms
+2026-10-11 19:01:40.407 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 5.8601 ms
+2026-10-11 19:01:42.798 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 11.3425 ms
+2026-10-11 19:01:42.811 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.2903 ms
+2026-10-11 19:01:42.829 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.6812 ms
+2026-10-11 19:01:42.844 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 1.5452 ms
+2026-10-11 19:01:43.995 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.2713 ms
+2026-10-11 19:01:44.015 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 7.7146 ms
+2026-10-11 19:01:44.062 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 37.0857 ms
+2026-10-11 19:01:44.098 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.5882 ms
+2026-10-11 19:01:55.179 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8895 ms
+2026-10-11 19:01:55.199 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 6.6626 ms
+2026-10-11 19:01:55.216 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.0441 ms
+2026-10-11 19:01:55.230 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.3082 ms
+2026-10-11 19:01:56.532 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 6.3242 ms
+2026-10-11 19:01:58.230 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 6.4816 ms
+2026-10-11 19:02:38.976 +06:00 [INF] HTTP POST /api/v1/vouchers responded 200 in 36.0786 ms
+2026-10-11 19:02:39.003 +06:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-10-11 19:02:39.007 +06:00 [INF] HTTP POST /api/v1/vouchers/df54d165-6045-4852-8a6e-ba57fc5a56d2/post responded 200 in 13.9714 ms
+2026-10-11 19:02:39.028 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 1.6786 ms
+2026-10-11 19:02:41.789 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 13.9849 ms
+2026-10-11 19:02:41.806 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.2304 ms
+2026-10-11 19:02:41.858 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 4.1797 ms
+2026-10-11 19:02:41.876 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.6973 ms
+2026-10-11 19:02:43.471 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.3470 ms
+2026-10-11 19:02:43.499 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 4.7548 ms
+2026-10-11 19:02:43.521 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.1626 ms
+2026-10-11 19:02:43.542 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.0462 ms
+2026-10-11 19:02:57.277 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 24.2533 ms
+2026-10-11 19:02:59.644 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 1.8037 ms
+2026-10-11 19:03:02.121 +06:00 [INF] HTTP GET /api/v1/vouchers/4dad7bf2-c087-44f4-adb9-102e6aaf6668 responded 200 in 13.5333 ms
+2026-10-11 19:03:03.315 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 7.3227 ms
+2026-10-11 19:03:04.460 +06:00 [INF] HTTP GET /api/v1/vouchers/df54d165-6045-4852-8a6e-ba57fc5a56d2 responded 200 in 4.7453 ms
+2026-10-11 19:03:07.710 +06:00 [INF] HTTP GET /api/v1/vouchers responded 401 in 0.9348 ms
+2026-10-11 19:03:07.854 +06:00 [INF] HTTP POST /api/v1/auth/refresh responded 200 in 19.2574 ms
+2026-10-11 19:03:08.014 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 1.7362 ms
+2026-10-11 19:03:11.409 +06:00 [INF] HTTP GET /api/v1/accounts responded 200 in 8.8381 ms
+2026-10-11 19:03:16.247 +06:00 [INF] HTTP GET /api/v1/reports/ledger responded 200 in 19.4271 ms
+2026-10-11 19:03:50.912 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.3369 ms
+2026-10-11 19:03:50.952 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 5.9882 ms
+2026-10-11 19:03:50.970 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 6.7601 ms
+2026-10-11 19:03:50.985 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.6754 ms
+2026-10-11 19:04:57.077 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 26.8335 ms
+2026-10-11 19:04:59.027 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.8879 ms
+2026-10-11 19:04:59.053 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.7137 ms
+2026-10-11 19:04:59.080 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 8.8980 ms
+2026-10-11 19:04:59.100 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.5237 ms
+2026-10-11 19:04:59.996 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 8.4234 ms
+2026-10-11 19:05:01.899 +06:00 [INF] HTTP GET /api/v1/vouchers responded 200 in 6.3282 ms
+2026-10-11 19:09:24.834 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 15.3439 ms
+2026-10-11 19:09:24.872 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 2.0275 ms
+2026-10-11 19:09:25.002 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 7.5312 ms
+2026-10-11 19:09:25.024 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 2.5721 ms
+2026-10-11 19:09:29.389 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.3195 ms
+2026-10-11 19:09:29.410 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.8287 ms
+2026-10-11 19:09:29.451 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 13.1899 ms
+2026-10-11 19:09:29.480 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 10.8742 ms
+2026-10-11 19:09:33.665 +06:00 [INF] HTTP GET /api/v1/notifications responded 200 in 6.6289 ms
+2026-10-11 19:09:34.866 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 1.0031 ms
+2026-10-11 19:09:34.912 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 1.2181 ms
+2026-10-11 19:09:34.947 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.2828 ms
+2026-10-11 19:09:34.973 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 3.8616 ms
+2026-10-11 19:09:38.697 +06:00 [INF] HTTP GET /api/v1/profile responded 200 in 10.7570 ms
+2026-10-11 19:09:56.369 +06:00 [INF] HTTP GET /api/v1/dashboard/summary responded 200 in 0.5908 ms
+2026-10-11 19:09:56.398 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/income-expense responded 200 in 3.7107 ms
+2026-10-11 19:09:56.420 +06:00 [INF] HTTP GET /api/v1/dashboard/charts/expense-by-category responded 200 in 1.3078 ms
+2026-10-11 19:09:56.444 +06:00 [INF] HTTP GET /api/v1/dashboard/recent-transactions responded 200 in 4.1813 ms

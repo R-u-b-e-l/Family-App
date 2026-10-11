@@ -1,0 +1,17 @@
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\bin\Debug\net10.0\FamilyManagement.Application.deps.json
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\bin\Debug\net10.0\FamilyManagement.Application.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\bin\Debug\net10.0\FamilyManagement.Application.pdb
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\bin\Debug\net10.0\FamilyManagement.Domain.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\bin\Debug\net10.0\FamilyManagement.Shared.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\bin\Debug\net10.0\FamilyManagement.Domain.pdb
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\bin\Debug\net10.0\FamilyManagement.Shared.pdb
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.csproj.AssemblyReference.cache
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.AssemblyInfoInputs.cache
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.AssemblyInfo.cs
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.csproj.CoreCompileInputs.cache
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyMa.277E9566.Up2Date
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\refint\FamilyManagement.Application.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.pdb
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\ref\FamilyManagement.Application.dll

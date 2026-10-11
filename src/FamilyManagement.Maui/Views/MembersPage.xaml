@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             x:Class="FamilyManagement.Maui.Views.MembersPage"
+             x:DataType="vm:MembersViewModel"
+             Style="{StaticResource AppPage}"
+             Title="Family Members">
+    <Grid RowDefinitions="Auto,*" Padding="16,8,16,0" RowSpacing="8">
+
+        <Border Style="{StaticResource InputWrap}">
+            <Entry Text="{Binding Search}" Placeholder="Search members…" ClearButtonVisibility="WhileEditing" />
+        </Border>
+
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadCommand}"
+                     RefreshColor="{StaticResource Primary}">
+            <CollectionView ItemsSource="{Binding Members}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="No members found." Style="{StaticResource MutedText}" Margin="0,30" HorizontalOptions="Center" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:UserDto">
+                        <Grid Padding="0,3">
+                            <Border Style="{StaticResource Card}" Padding="14,10">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                    <Border StrokeThickness="0" StrokeShape="RoundRectangle 21"
+                                            BackgroundColor="{StaticResource Secondary}" WidthRequest="42" HeightRequest="42">
+                                        <Label Text="👤" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                        <Label Text="{Binding FullName}" Style="{StaticResource BodyText}"
+                                               FontFamily="OpenSansSemibold" />
+                                        <Label Style="{StaticResource MutedText}">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}@{0} · {1}">
+                                                    <Binding Path="UserName" />
+                                                    <Binding Path="Status" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
+                                        <Border Style="{StaticResource Chip}" BackgroundColor="{StaticResource Secondary}">
+                                            <Label Text="{Binding Roles[0], FallbackValue='—'}" FontSize="10"
+                                                   TextColor="{StaticResource SecondaryDarkText}" />
+                                        </Border>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <BoxView HeightRequest="90" Color="Transparent" />
+                </CollectionView.Footer>
+            </CollectionView>
+        </RefreshView>
+
+        <Button Grid.Row="1" Text="＋" FontSize="26" WidthRequest="60" HeightRequest="60" CornerRadius="30"
+                BackgroundColor="{StaticResource Primary}" TextColor="White"
+                HorizontalOptions="End" VerticalOptions="End" Margin="0,0,8,16"
+                Command="{Binding AddMemberCommand}" IsVisible="{Binding CanCreate}" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FamilyManagement.Maui.Views.SplashPage"
+             Style="{StaticResource AppPage}"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="18">
+        <Border StrokeThickness="0" StrokeShape="RoundRectangle 28" BackgroundColor="{StaticResource Primary}"
+                WidthRequest="96" HeightRequest="96">
+            <Label Text="৳" FontSize="48" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+        </Border>
+        <Label Text="Family Manager" Style="{StaticResource PageTitle}" HorizontalOptions="Center" />
+        <Label Text="Family finances, done right" Style="{StaticResource MutedText}" HorizontalOptions="Center" />
+        <ActivityIndicator IsRunning="True" Color="{StaticResource Primary}" Margin="0,24,0,0" />
+    </VerticalStackLayout>
+</ContentPage>
