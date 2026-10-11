@@ -20,6 +20,12 @@ public partial class ProfileViewModel(ApiClient api, Session session) : BaseView
     [ObservableProperty] private string _newPassword = string.Empty;
     [ObservableProperty] private string _confirmPassword = string.Empty;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasPicture))]
+    private string? _pictureUrl;
+
+    public bool HasPicture => !string.IsNullOrEmpty(PictureUrl);
+
     [RelayCommand]
     private Task LoadAsync() => RunAsync(async () =>
     {
@@ -32,7 +38,35 @@ public partial class ProfileViewModel(ApiClient api, Session session) : BaseView
         UserName = profile.UserName;
         FamilyName = profile.FamilyName;
         RoleText = string.Join(", ", profile.Roles);
+        PictureUrl = BuildPictureUrl(profile.ProfilePictureUrl);
     });
+
+    [RelayCommand]
+    private Task ChangePictureAsync() => RunAsync(async () =>
+    {
+        var photo = await MediaPicker.Default.PickPhotoAsync(new MediaPickerOptions
+        {
+            Title = "Choose your profile picture"
+        });
+        if (photo is null)
+            return;
+
+        var contentType = Path.GetExtension(photo.FileName).ToLowerInvariant() switch
+        {
+            ".png" => "image/png",
+            ".webp" => "image/webp",
+            _ => "image/jpeg"
+        };
+
+        await using var stream = await photo.OpenReadAsync();
+        var updated = await api.UploadProfilePictureAsync(stream, photo.FileName, contentType);
+        PictureUrl = BuildPictureUrl(updated.ProfilePictureUrl);
+        await ToastAsync("Profile picture updated ✓");
+    });
+
+    /// <summary>Relative path from the API → absolute URL, cache-busted so the new photo shows immediately.</summary>
+    public static string? BuildPictureUrl(string? relativePath) =>
+        string.IsNullOrEmpty(relativePath) ? null : $"{ApiClient.ServerUrl}{relativePath}?t={DateTime.UtcNow.Ticks}";
 
     [RelayCommand]
     private Task SaveAsync() => RunAsync(async () =>

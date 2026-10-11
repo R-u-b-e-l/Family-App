@@ -61,7 +61,7 @@ public partial class DashboardViewModel(ApiClient api, Session session, LocalCac
     private Task RefreshCommandAsync() => LoadAsync();
 
     [RelayCommand]
-    private Task NewVoucherAsync() => Shell.Current.GoToAsync("voucher-entry");
+    private Task NewVoucherAsync() => Shell.Current.GoToAsync("quick-voucher");
 
     [RelayCommand]
     private Task OpenNotificationsAsync() => Shell.Current.GoToAsync("notifications");

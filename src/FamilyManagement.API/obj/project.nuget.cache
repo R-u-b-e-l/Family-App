@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9S8Zj52CFLM=",
+  "dgSpecHash": "Po5XRFw+avM=",
   "success": true,
   "projectFilePath": "G:\\Rubel Mahmud\\Family App\\src\\FamilyManagement.API\\FamilyManagement.API.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,7 @@
     "C:\\Users\\EMSL\\.nuget\\packages\\microsoft.visualstudio.solutionpersistence\\1.0.52\\microsoft.visualstudio.solutionpersistence.1.0.52.nupkg.sha512",
     "C:\\Users\\EMSL\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
     "C:\\Users\\EMSL\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
+    "C:\\Users\\EMSL\\.nuget\\packages\\questpdf\\2026.9.1\\questpdf.2026.9.1.nupkg.sha512",
     "C:\\Users\\EMSL\\.nuget\\packages\\serilog\\4.3.0\\serilog.4.3.0.nupkg.sha512",
     "C:\\Users\\EMSL\\.nuget\\packages\\serilog.aspnetcore\\10.0.0\\serilog.aspnetcore.10.0.0.nupkg.sha512",
     "C:\\Users\\EMSL\\.nuget\\packages\\serilog.extensions.hosting\\10.0.0\\serilog.extensions.hosting.10.0.0.nupkg.sha512",

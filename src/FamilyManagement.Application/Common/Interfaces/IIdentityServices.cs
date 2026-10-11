@@ -28,6 +28,8 @@ public interface IUserService
     Task AdminResetPasswordAsync(Guid userId, AdminResetPasswordRequest request, CancellationToken ct = default);
     Task<UserDto> GetProfileAsync(CancellationToken ct = default);
     Task<UserDto> UpdateProfileAsync(UpdateProfileRequest request, CancellationToken ct = default);
+    /// <summary>Persists the stored picture's relative path on the signed-in user and returns the old path (for cleanup).</summary>
+    Task<(UserDto User, string? OldPath)> SetProfilePicturePathAsync(string relativePath, CancellationToken ct = default);
 }
 
 /// <summary>Implemented in Infrastructure (depends on RoleManager).</summary>

@@ -9,3 +9,4 @@ G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\Famil
 G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\refint\FamilyManagement.Shared.dll
 G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.pdb
 G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\ref\FamilyManagement.Shared.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Shared\obj\Release\net10.0\FamilyManagement.Shared.sourcelink.json

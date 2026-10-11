@@ -246,6 +246,20 @@ public class UserService(
         return await MapAsync(user, ct);
     }
 
+    public async Task<(UserDto User, string? OldPath)> SetProfilePicturePathAsync(string relativePath, CancellationToken ct = default)
+    {
+        var user = await ctx.Users.FirstOrDefaultAsync(u => u.Id == currentUser.UserId, ct)
+            ?? throw new NotFoundException("Profile not found.");
+
+        var oldPath = user.ProfilePicturePath;
+        user.ProfilePicturePath = relativePath;
+        user.UpdatedDate = clock.UtcNow;
+
+        audit.Log("Profile.PictureChange", nameof(AppUser), user.Id.ToString());
+        await ctx.SaveChangesAsync(ct);
+        return (await MapAsync(user, ct), oldPath);
+    }
+
     // ---- helpers ---------------------------------------------------------
 
     private async Task EnsureAvailableAsync(string? userName, string? email, string? mobile, Guid? excludeUserId, CancellationToken ct)

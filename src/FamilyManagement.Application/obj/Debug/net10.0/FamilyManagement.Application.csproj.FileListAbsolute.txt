@@ -15,3 +15,4 @@ G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\Fa
 G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\refint\FamilyManagement.Application.dll
 G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.pdb
 G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\ref\FamilyManagement.Application.dll
+G:\Rubel Mahmud\Family App\src\FamilyManagement.Application\obj\Debug\net10.0\FamilyManagement.Application.sourcelink.json

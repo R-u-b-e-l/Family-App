@@ -7,6 +7,9 @@
              x:DataType="vm:LedgerViewModel"
              Style="{StaticResource AppPage}"
              Title="Ledger">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="📄 PDF" Command="{Binding DownloadPdfCommand}" />
+    </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,Auto,*" Padding="16,8,16,0" RowSpacing="10">
 
         <VerticalStackLayout Spacing="6">

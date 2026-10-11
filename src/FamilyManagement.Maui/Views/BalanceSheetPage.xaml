@@ -7,6 +7,9 @@
              x:DataType="vm:BalanceSheetViewModel"
              Style="{StaticResource AppPage}"
              Title="Balance Sheet">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="📄 PDF" Command="{Binding DownloadPdfCommand}" />
+    </ContentPage.ToolbarItems>
     <ScrollView>
         <VerticalStackLayout Padding="16,8,16,20" Spacing="12">
 

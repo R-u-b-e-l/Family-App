@@ -10,6 +10,7 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute("register", typeof(RegisterPage));
         Routing.RegisterRoute("forgot-password", typeof(ForgotPasswordPage));
+        Routing.RegisterRoute("quick-voucher", typeof(QuickVoucherPage));
         Routing.RegisterRoute("voucher-entry", typeof(VoucherEntryPage));
         Routing.RegisterRoute("voucher-detail", typeof(VoucherDetailPage));
         Routing.RegisterRoute("account-entry", typeof(AccountEntryPage));

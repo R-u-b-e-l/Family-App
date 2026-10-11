@@ -232,6 +232,16 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
+[G:/Rubel Mahmud/Family App/src/FamilyManagement.Maui/Views/QuickVoucherPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FamilyManagement.Maui.Views.QuickVoucherPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\QuickVoucherPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\QuickVoucherPage.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
 [G:/Rubel Mahmud/Family App/src/FamilyManagement.Maui/Views/RegisterPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FamilyManagement.Maui.Views.RegisterPage.xaml

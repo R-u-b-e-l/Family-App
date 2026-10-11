@@ -198,6 +198,52 @@ public class ApiClient(TokenStore tokens, Session session)
     public Task MarkAllNotificationsReadAsync(CancellationToken ct = default) =>
         PatchAsync("/notifications/read-all", ct);
 
+    /// <summary>Downloads a PDF statement into the app cache and returns the local file path.</summary>
+    public async Task<string> DownloadPdfAsync(string pathAndQuery, string fileName, CancellationToken ct = default)
+    {
+        var response = await SendRawAsync(HttpMethod.Get, pathAndQuery, null, true, ct);
+        if (response.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            response.Dispose();
+            if (!await TryRefreshAsync(ct))
+                throw new ApiException("Your session has expired. Please sign in again.", [], HttpStatusCode.Unauthorized);
+            response = await SendRawAsync(HttpMethod.Get, pathAndQuery, null, true, ct);
+        }
+
+        using (response)
+        {
+            if (!response.IsSuccessStatusCode)
+                throw new ApiException("Could not generate the PDF. Try again.", [], response.StatusCode);
+
+            var bytes = await response.Content.ReadAsByteArrayAsync(ct);
+            var path = Path.Combine(FileSystem.CacheDirectory, fileName);
+            await File.WriteAllBytesAsync(path, bytes, ct);
+            return path;
+        }
+    }
+
+    /// <summary>Uploads the signed-in user's profile picture.</summary>
+    public async Task<UserDto> UploadProfilePictureAsync(Stream imageStream, string fileName, string contentType, CancellationToken ct = default)
+    {
+        using var content = new MultipartFormDataContent();
+        var streamContent = new StreamContent(imageStream);
+        streamContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+        content.Add(streamContent, "file", fileName);
+
+        var request = new HttpRequestMessage(HttpMethod.Post, $"{ServerUrl}{ApiPrefix}/profile/picture") { Content = content };
+        if (await tokens.GetAccessTokenAsync() is { } accessToken)
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+        using var response = await _http.SendAsync(request, ct);
+        var envelope = await response.Content.ReadFromJsonAsync<ApiResponse<UserDto>>(JsonOptions, ct);
+        if (envelope is { Success: true, Data: { } user })
+        {
+            session.UpdateUser(user);
+            return user;
+        }
+        throw new ApiException(envelope?.Message ?? "Upload failed.", envelope?.Errors ?? [], response.StatusCode);
+    }
+
     // ---- transport ------------------------------------------------------------
 
     private Task<T> GetAsync<T>(string path, CancellationToken ct = default) =>

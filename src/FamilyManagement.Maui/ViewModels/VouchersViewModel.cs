@@ -92,5 +92,5 @@ public partial class VouchersViewModel(ApiClient api, Session session) : BaseVie
     }
 
     [RelayCommand]
-    private Task NewVoucherAsync() => Shell.Current.GoToAsync("voucher-entry");
+    private Task NewVoucherAsync() => Shell.Current.GoToAsync("quick-voucher");
 }

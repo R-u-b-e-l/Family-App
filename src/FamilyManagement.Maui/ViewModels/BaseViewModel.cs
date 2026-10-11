@@ -63,4 +63,10 @@ public abstract partial class BaseViewModel : ObservableObject
 
     protected static Task GoToLoginAsync() =>
         MainThread.InvokeOnMainThreadAsync(() => Shell.Current.GoToAsync("//login"));
+
+    /// <summary>Opens a downloaded PDF with the phone's viewer/share sheet.</summary>
+    protected static async Task OpenPdfAsync(string filePath, string title)
+    {
+        await Launcher.Default.OpenAsync(new OpenFileRequest(title, new ReadOnlyFile(filePath)));
+    }
 }

@@ -29,11 +29,14 @@ try
         .ReadFrom.Services(services)
         .Enrich.FromLogContext());
 
+    QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
     // ---- layers ------------------------------------------------------------
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddScoped<ICurrentUser, CurrentUser>();
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddSingleton<PdfReportService>();
 
     // ---- MVC ---------------------------------------------------------------
     builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
@@ -163,6 +166,10 @@ try
         context.Response.Headers.Append("Referrer-Policy", "no-referrer");
         await next();
     });
+
+    // Serve uploaded profile pictures.
+    Directory.CreateDirectory(Path.Combine(app.Environment.ContentRootPath, "wwwroot"));
+    app.UseStaticFiles();
 
     app.UseCors();
     app.UseRateLimiter();

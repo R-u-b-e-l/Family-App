@@ -16,6 +16,12 @@
         <member name="E:FamilyManagement.Maui.Services.ApiClient.SessionExpired">
             <summary>Raised when the session can no longer be refreshed; the app returns to login.</summary>
         </member>
+        <member name="M:FamilyManagement.Maui.Services.ApiClient.DownloadPdfAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>Downloads a PDF statement into the app cache and returns the local file path.</summary>
+        </member>
+        <member name="M:FamilyManagement.Maui.Services.ApiClient.UploadProfilePictureAsync(System.IO.Stream,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>Uploads the signed-in user's profile picture.</summary>
+        </member>
         <member name="M:FamilyManagement.Maui.Services.ApiClient.TryRefreshAsync(System.Threading.CancellationToken)">
             <summary>Single-flight refresh: concurrent 401s wait for one refresh call.</summary>
         </member>
@@ -106,6 +112,9 @@
         </member>
         <member name="M:FamilyManagement.Maui.ViewModels.BaseViewModel.RunAsync(System.Func{System.Threading.Tasks.Task},System.Boolean)">
             <summary>Runs an operation with the busy flag and friendly error toasts.</summary>
+        </member>
+        <member name="M:FamilyManagement.Maui.ViewModels.BaseViewModel.OpenPdfAsync(System.String,System.String)">
+            <summary>Opens a downloaded PDF with the phone's viewer/share sheet.</summary>
         </member>
         <member name="P:FamilyManagement.Maui.ViewModels.BaseViewModel.IsBusy">
             <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.BaseViewModel._isBusy"/>
@@ -398,6 +407,10 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="M:FamilyManagement.Maui.ViewModels.ProfileViewModel.BuildPictureUrl(System.String)">
+            <summary>Relative path from the API → absolute URL, cache-busted so the new photo shows immediately.</summary>
         </member>
         <member name="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.FullName">
             <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.ProfileViewModel._fullName"/>
@@ -429,11 +442,20 @@
         <member name="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.ConfirmPassword">
             <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.ProfileViewModel._confirmPassword"/>
         </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.PictureUrl">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.ProfileViewModel._pictureUrl"/>
+        </member>
         <member name="F:FamilyManagement.Maui.ViewModels.ProfileViewModel.loadCommand">
             <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.LoadCommand"/>.</summary>
         </member>
         <member name="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.LoadCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.ProfileViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.ProfileViewModel.changePictureCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.ChangePictureCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.ChangePictureCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.ProfileViewModel.ChangePictureAsync"/>.</summary>
         </member>
         <member name="F:FamilyManagement.Maui.ViewModels.ProfileViewModel.saveCommand">
             <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.ProfileViewModel.SaveCommand"/>.</summary>
@@ -501,6 +523,71 @@
         <member name="P:FamilyManagement.Maui.ViewModels.NotificationsViewModel.MarkAllReadCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.NotificationsViewModel.MarkAllReadAsync"/>.</summary>
         </member>
+        <member name="T:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel">
+            <summary>
+            Beginner-friendly voucher entry: pick what happened, a category and one amount —
+            the balanced double-entry voucher (debit/credit) is built automatically.
+            </summary>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="M:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.#ctor(FamilyManagement.Maui.Services.ApiClient)">
+            <summary>
+            Beginner-friendly voucher entry: pick what happened, a category and one amount —
+            the balanced double-entry voucher (debit/credit) is built automatically.
+            </summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.ModeIndex">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._modeIndex"/>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.Category">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._category"/>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.MoneyAccount">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._moneyAccount"/>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.TransferFrom">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._transferFrom"/>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.TransferTo">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._transferTo"/>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.Amount">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._amount"/>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.Date">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._date"/>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.Narration">
+            <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel._narration"/>
+        </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.setModeCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.SetModeCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.SetModeCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.SetMode(System.String)"/>.</summary>
+        </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.saveCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.SaveCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.SaveCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.SaveAsync"/>.</summary>
+        </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.openAdvancedCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.OpenAdvancedCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.OpenAdvancedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.QuickVoucherViewModel.OpenAdvancedAsync"/>.</summary>
+        </member>
         <member name="T:FamilyManagement.Maui.ViewModels.RegisterViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -544,6 +631,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:FamilyManagement.Maui.ViewModels.LedgerViewModel.AccountId">
             <inheritdoc cref="F:FamilyManagement.Maui.ViewModels.LedgerViewModel._accountId"/>
@@ -581,7 +669,14 @@
         <member name="P:FamilyManagement.Maui.ViewModels.LedgerViewModel.LoadMoreCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.LedgerViewModel.LoadMoreAsync"/>.</summary>
         </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.LedgerViewModel.downloadPdfCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.LedgerViewModel.DownloadPdfCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.LedgerViewModel.DownloadPdfCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.LedgerViewModel.DownloadPdfAsync"/>.</summary>
+        </member>
         <member name="T:FamilyManagement.Maui.ViewModels.BookViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
@@ -610,7 +705,14 @@
         <member name="P:FamilyManagement.Maui.ViewModels.BookViewModel.LoadMoreCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.BookViewModel.LoadMoreAsync"/>.</summary>
         </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.BookViewModel.downloadPdfCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.BookViewModel.DownloadPdfCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.BookViewModel.DownloadPdfCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.BookViewModel.DownloadPdfAsync"/>.</summary>
+        </member>
         <member name="T:FamilyManagement.Maui.ViewModels.TrialBalanceViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
         </member>
@@ -626,7 +728,14 @@
         <member name="P:FamilyManagement.Maui.ViewModels.TrialBalanceViewModel.GenerateCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.TrialBalanceViewModel.GenerateAsync"/>.</summary>
         </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.TrialBalanceViewModel.downloadPdfCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.TrialBalanceViewModel.DownloadPdfCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.TrialBalanceViewModel.DownloadPdfCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.TrialBalanceViewModel.DownloadPdfAsync"/>.</summary>
+        </member>
         <member name="T:FamilyManagement.Maui.ViewModels.ProfitLossViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
         </member>
@@ -648,7 +757,14 @@
         <member name="P:FamilyManagement.Maui.ViewModels.ProfitLossViewModel.GenerateCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.ProfitLossViewModel.GenerateAsync"/>.</summary>
         </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.ProfitLossViewModel.downloadPdfCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.ProfitLossViewModel.DownloadPdfCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.ProfitLossViewModel.DownloadPdfCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.ProfitLossViewModel.DownloadPdfAsync"/>.</summary>
+        </member>
         <member name="T:FamilyManagement.Maui.ViewModels.BalanceSheetViewModel">
+            <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
         </member>
@@ -663,6 +779,12 @@
         </member>
         <member name="P:FamilyManagement.Maui.ViewModels.BalanceSheetViewModel.GenerateCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.BalanceSheetViewModel.GenerateAsync"/>.</summary>
+        </member>
+        <member name="F:FamilyManagement.Maui.ViewModels.BalanceSheetViewModel.downloadPdfCommand">
+            <summary>The backing field for <see cref="P:FamilyManagement.Maui.ViewModels.BalanceSheetViewModel.DownloadPdfCommand"/>.</summary>
+        </member>
+        <member name="P:FamilyManagement.Maui.ViewModels.BalanceSheetViewModel.DownloadPdfCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FamilyManagement.Maui.ViewModels.BalanceSheetViewModel.DownloadPdfAsync"/>.</summary>
         </member>
         <member name="T:FamilyManagement.Maui.ViewModels.VoucherDetailViewModel">
             <inheritdoc/>
@@ -1159,6 +1281,12 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentPassword">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentPassword" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PictureUrl">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PictureUrl" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasPicture">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasPicture" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Currency">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Currency" generated properties.</summary>
         </member>
@@ -1176,6 +1304,48 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ContactEmail">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ContactEmail" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ModeIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ModeIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsExpense">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsExpense" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsIncome">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsIncome" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsTransfer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsTransfer" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CategoryLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CategoryLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MoneyLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MoneyLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ExplainText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ExplainText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Category">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Category" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MoneyAccount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MoneyAccount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TransferFrom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TransferFrom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TransferTo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TransferTo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Amount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Amount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Date">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Date" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Narration">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Narration" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AdminFullName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AdminFullName" generated properties.</summary>
@@ -1236,9 +1406,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Credit">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Credit" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Narration">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Narration" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TypeIndex">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TypeIndex" generated properties.</summary>
@@ -1375,6 +1542,12 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentPassword">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentPassword" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PictureUrl">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PictureUrl" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasPicture">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasPicture" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Currency">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Currency" generated properties.</summary>
         </member>
@@ -1392,6 +1565,48 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ContactEmail">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ContactEmail" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ModeIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ModeIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsExpense">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsExpense" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsIncome">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsIncome" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsTransfer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsTransfer" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CategoryLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CategoryLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MoneyLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MoneyLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ExplainText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ExplainText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Category">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Category" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MoneyAccount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MoneyAccount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TransferFrom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TransferFrom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TransferTo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TransferTo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Amount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Amount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Date">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Date" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Narration">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Narration" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AdminFullName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AdminFullName" generated properties.</summary>
@@ -1452,9 +1667,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Credit">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Credit" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Narration">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Narration" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TypeIndex">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TypeIndex" generated properties.</summary>

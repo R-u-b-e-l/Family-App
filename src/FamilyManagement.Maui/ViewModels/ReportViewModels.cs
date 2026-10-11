@@ -75,6 +75,22 @@ public partial class LedgerViewModel(ApiClient api) : BaseViewModel
         foreach (var row in Report.Rows.Items)
             Rows.Add(row);
     }
+
+    [RelayCommand]
+    private Task DownloadPdfAsync() => RunAsync(async () =>
+    {
+        if (SelectedAccount is null)
+        {
+            await ToastAsync("Choose an account first.");
+            return;
+        }
+        var from = DateOnly.FromDateTime(DateFrom);
+        var to = DateOnly.FromDateTime(DateTo);
+        var path = await api.DownloadPdfAsync(
+            $"/reports/ledger/pdf?accountId={SelectedAccount.Id}&dateFrom={from:yyyy-MM-dd}&dateTo={to:yyyy-MM-dd}",
+            $"Ledger_{SelectedAccount.Code}_{from:yyyyMMdd}.pdf");
+        await OpenPdfAsync(path, "Ledger Statement");
+    });
 }
 
 [QueryProperty(nameof(Kind), "kind")]
@@ -122,6 +138,18 @@ public partial class BookViewModel(ApiClient api) : BaseViewModel
         foreach (var row in Report.Rows.Items)
             Rows.Add(row);
     }
+
+    [RelayCommand]
+    private Task DownloadPdfAsync() => RunAsync(async () =>
+    {
+        var endpoint = Kind == "bank" ? "bankbook" : "cashbook";
+        var from = DateOnly.FromDateTime(DateFrom);
+        var to = DateOnly.FromDateTime(DateTo);
+        var path = await api.DownloadPdfAsync(
+            $"/reports/{endpoint}/pdf?dateFrom={from:yyyy-MM-dd}&dateTo={to:yyyy-MM-dd}",
+            $"{PageTitle.Replace(" ", "")}_{from:yyyyMMdd}.pdf");
+        await OpenPdfAsync(path, PageTitle);
+    });
 }
 
 public partial class TrialBalanceViewModel(ApiClient api) : BaseViewModel
@@ -133,6 +161,16 @@ public partial class TrialBalanceViewModel(ApiClient api) : BaseViewModel
     private Task GenerateAsync() => RunAsync(async () =>
     {
         Report = await api.GetTrialBalanceAsync(DateOnly.FromDateTime(AsOf));
+    });
+
+    [RelayCommand]
+    private Task DownloadPdfAsync() => RunAsync(async () =>
+    {
+        var asOf = DateOnly.FromDateTime(AsOf);
+        var path = await api.DownloadPdfAsync(
+            $"/reports/trial-balance/pdf?asOf={asOf:yyyy-MM-dd}",
+            $"TrialBalance_{asOf:yyyyMMdd}.pdf");
+        await OpenPdfAsync(path, "Trial Balance");
     });
 }
 
@@ -149,6 +187,17 @@ public partial class ProfitLossViewModel(ApiClient api) : BaseViewModel
         Report = await api.GetProfitLossAsync(DateOnly.FromDateTime(DateFrom), DateOnly.FromDateTime(DateTo));
         IsProfit = Report.NetProfit >= 0;
     });
+
+    [RelayCommand]
+    private Task DownloadPdfAsync() => RunAsync(async () =>
+    {
+        var from = DateOnly.FromDateTime(DateFrom);
+        var to = DateOnly.FromDateTime(DateTo);
+        var path = await api.DownloadPdfAsync(
+            $"/reports/profit-loss/pdf?dateFrom={from:yyyy-MM-dd}&dateTo={to:yyyy-MM-dd}",
+            $"ProfitLoss_{from:yyyyMMdd}.pdf");
+        await OpenPdfAsync(path, "Profit & Loss");
+    });
 }
 
 public partial class BalanceSheetViewModel(ApiClient api) : BaseViewModel
@@ -160,5 +209,15 @@ public partial class BalanceSheetViewModel(ApiClient api) : BaseViewModel
     private Task GenerateAsync() => RunAsync(async () =>
     {
         Report = await api.GetBalanceSheetAsync(DateOnly.FromDateTime(AsOf));
+    });
+
+    [RelayCommand]
+    private Task DownloadPdfAsync() => RunAsync(async () =>
+    {
+        var asOf = DateOnly.FromDateTime(AsOf);
+        var path = await api.DownloadPdfAsync(
+            $"/reports/balance-sheet/pdf?asOf={asOf:yyyy-MM-dd}",
+            $"BalanceSheet_{asOf:yyyyMMdd}.pdf");
+        await OpenPdfAsync(path, "Balance Sheet");
     });
 }
