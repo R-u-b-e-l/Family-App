@@ -5,9 +5,12 @@
              Style="{StaticResource AppPage}"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="18">
-        <Border StrokeThickness="0" StrokeShape="RoundRectangle 28" BackgroundColor="{StaticResource Primary}"
-                WidthRequest="96" HeightRequest="96">
-            <Label Text="৳" FontSize="48" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+        <Border StrokeThickness="0" StrokeShape="RoundRectangle 28" BackgroundColor="White"
+                WidthRequest="112" HeightRequest="112" Padding="12">
+            <Border.Shadow>
+                <Shadow Brush="#000000" Opacity="0.12" Radius="10" Offset="0,4" />
+            </Border.Shadow>
+            <Image Source="familylogo.png" Aspect="AspectFit" />
         </Border>
         <Label Text="Family Manager" Style="{StaticResource PageTitle}" HorizontalOptions="Center" />
         <Label Text="Family finances, done right" Style="{StaticResource MutedText}" HorizontalOptions="Center" />
