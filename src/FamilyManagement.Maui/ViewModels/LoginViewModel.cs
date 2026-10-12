@@ -26,6 +26,7 @@ public partial class LoginViewModel(ApiClient api, Session session) : BaseViewMo
     {
         if (!ApplyServerUrl())
         {
+            // this is local ip
             await ToastAsync("Enter a valid server address, e.g. http://192.168.211.50:5005");
             return;
         }
