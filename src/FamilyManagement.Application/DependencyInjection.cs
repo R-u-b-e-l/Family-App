@@ -18,6 +18,8 @@ public static class DependencyInjection
         services.AddScoped<IVoucherService, VoucherService>();
         services.AddScoped<IReportService, ReportService>();
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<ILoanService, LoanService>();
+        services.AddScoped<IMemberStatementService, MemberStatementService>();
 
         return services;
     }

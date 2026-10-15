@@ -187,9 +187,23 @@ public class ApiIntegrationTests(ApiFactory factory) : IClassFixture<DatabaseRes
         });
         Assert.Equal(HttpStatusCode.Forbidden, attemptVoucher.StatusCode);
 
-        // But reading the dashboard is allowed.
-        var dashboard = await memberClient.GetAsync("/api/v1/dashboard/summary");
-        Assert.Equal(HttpStatusCode.OK, dashboard.StatusCode);
+        // The family dashboard is admin-only; members get 403 while the admin gets 200.
+        var memberDashboard = await memberClient.GetAsync("/api/v1/dashboard/summary");
+        Assert.Equal(HttpStatusCode.Forbidden, memberDashboard.StatusCode);
+
+        var adminDashboard = await client.GetAsync("/api/v1/dashboard/summary");
+        Assert.Equal(HttpStatusCode.OK, adminDashboard.StatusCode);
+
+        // But every member can read their own statement and loan summary.
+        var ownStatement = await memberClient.GetAsync($"/api/v1/member-statement/{memberAuth.User.Id}");
+        Assert.Equal(HttpStatusCode.OK, ownStatement.StatusCode);
+
+        var ownLoans = await memberClient.GetAsync("/api/v1/loans");
+        Assert.Equal(HttpStatusCode.OK, ownLoans.StatusCode);
+
+        // And a member cannot read the admin's statement (needs Member.View on others).
+        var adminStatement = await memberClient.GetAsync($"/api/v1/member-statement/{admin.User.Id}");
+        Assert.Equal(HttpStatusCode.Forbidden, adminStatement.StatusCode);
     }
 }
 

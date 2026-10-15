@@ -144,6 +144,21 @@ try
 
     var app = builder.Build();
 
+    // Bring existing families up to date with new template roles/permissions (additive, idempotent).
+    using (var scope = app.Services.CreateScope())
+    {
+        try
+        {
+            await scope.ServiceProvider
+                .GetRequiredService<FamilyManagement.Infrastructure.Identity.RoleSyncService>()
+                .SyncAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "Role/permission sync skipped (is the database migrated?)");
+        }
+    }
+
     // ---- pipeline -------------------------------------------------------------
     app.UseSerilogRequestLogging();
     app.UseMiddleware<ExceptionHandlingMiddleware>();

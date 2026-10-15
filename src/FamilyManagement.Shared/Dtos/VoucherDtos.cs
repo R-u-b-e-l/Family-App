@@ -13,6 +13,8 @@ public class VoucherListItemDto
     public decimal Amount { get; set; }
     public VoucherStatus Status { get; set; }
     public string CreatedByName { get; set; } = string.Empty;
+    /// <summary>The member this transaction relates to (contributor / spender), when tagged.</summary>
+    public string? MemberName { get; set; }
 }
 
 public class VoucherDto
@@ -31,6 +33,8 @@ public class VoucherDto
     public DateTime CreatedDate { get; set; }
     public string? PostedByName { get; set; }
     public DateTime? PostedDate { get; set; }
+    public Guid? MemberId { get; set; }
+    public string? MemberName { get; set; }
     public List<VoucherLineDto> Lines { get; set; } = [];
 }
 
@@ -51,6 +55,8 @@ public class SaveVoucherRequest
     public VoucherType VoucherType { get; set; }
     public DateOnly VoucherDate { get; set; }
     public string? Narration { get; set; }
+    /// <summary>Optional: the member this transaction relates to (who contributed / who spent).</summary>
+    public Guid? MemberId { get; set; }
     public List<SaveVoucherLineRequest> Lines { get; set; } = [];
 }
 

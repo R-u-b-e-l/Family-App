@@ -54,14 +54,19 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Border Grid.Row="2" Style="{StaticResource Card}" Padding="14,10" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
-            <Grid ColumnDefinitions="*,90,90">
-                <Label Text="Total" Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
-                <Label Grid.Column="1" Text="{Binding Report.TotalDebit, StringFormat='{0:N2}'}"
-                       Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
-                <Label Grid.Column="2" Text="{Binding Report.TotalCredit, StringFormat='{0:N2}'}"
-                       Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
-            </Grid>
+        <Border Grid.Row="2" Style="{StaticResource Card}" Padding="14,10"
+                IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
+            <VerticalStackLayout Spacing="4">
+                <Grid ColumnDefinitions="*,90,90">
+                    <Label Text="Total" Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" />
+                    <Label Grid.Column="1" Text="{Binding Report.TotalDebit, StringFormat='{0:N2}'}"
+                           Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                    <Label Grid.Column="2" Text="{Binding Report.TotalCredit, StringFormat='{0:N2}'}"
+                           Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                </Grid>
+                <Label Text="Debit = Credit ✓ (হিসাব মিলেছে)" Style="{StaticResource MutedText}"
+                       TextColor="{StaticResource Success}" IsVisible="{Binding Report.IsBalanced, FallbackValue=False}" />
+            </VerticalStackLayout>
         </Border>
     </Grid>
 </ContentPage>

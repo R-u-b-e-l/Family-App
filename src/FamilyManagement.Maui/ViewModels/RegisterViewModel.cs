@@ -39,6 +39,7 @@ public partial class RegisterViewModel(ApiClient api, Session session) : BaseVie
 
         MoneyConverter.Symbol = SplashPage.CurrencySymbol(session.Currency);
         await ToastAsync("Family created — welcome!");
+        AppShell.ApplySession(session);
         await Shell.Current.GoToAsync("//main");
     });
 

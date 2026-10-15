@@ -11,8 +11,11 @@ namespace FamilyManagement.Maui.ViewModels;
 /// Beginner-friendly voucher entry: pick what happened, a category and one amount —
 /// the balanced double-entry voucher (debit/credit) is built automatically.
 /// </summary>
-public partial class QuickVoucherViewModel(ApiClient api) : BaseViewModel
+public partial class QuickVoucherViewModel(ApiClient api, Session session) : BaseViewModel
 {
+    [ObservableProperty] private UserDto? _selectedMember;
+    public ObservableCollection<UserDto> Members { get; } = [];
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsExpense), nameof(IsIncome), nameof(IsTransfer),
         nameof(CategoryLabel), nameof(MoneyLabel), nameof(ExplainText))]
@@ -70,6 +73,19 @@ public partial class QuickVoucherViewModel(ApiClient api) : BaseViewModel
             MoneyAccounts.Add(account);
         MoneyAccount = MoneyAccounts.FirstOrDefault();
 
+        try
+        {
+            var members = await api.GetMembersAsync(pageSize: 100);
+            Members.Clear();
+            foreach (var member in members.Items)
+                Members.Add(member);
+            SelectedMember = Members.FirstOrDefault(m => m.Id == session.CurrentUser?.Id);
+        }
+        catch
+        {
+            // Member tagging is optional — the entry still works without the list.
+        }
+
         RefreshCategories();
     });
 
@@ -107,6 +123,7 @@ public partial class QuickVoucherViewModel(ApiClient api) : BaseViewModel
             {
                 VoucherType = VoucherType.CV,
                 VoucherDate = DateOnly.FromDateTime(Date),
+                MemberId = SelectedMember?.Id,
                 Narration = DefaultNarration($"Transfer: {TransferFrom.Name} → {TransferTo.Name}"),
                 Lines =
                 [
@@ -133,6 +150,7 @@ public partial class QuickVoucherViewModel(ApiClient api) : BaseViewModel
                 {
                     VoucherType = VoucherType.PV,
                     VoucherDate = DateOnly.FromDateTime(Date),
+                    MemberId = SelectedMember?.Id,
                     Narration = DefaultNarration(Category.Name),
                     Lines =
                     [
@@ -144,6 +162,7 @@ public partial class QuickVoucherViewModel(ApiClient api) : BaseViewModel
                 {
                     VoucherType = VoucherType.RV,
                     VoucherDate = DateOnly.FromDateTime(Date),
+                    MemberId = SelectedMember?.Id,
                     Narration = DefaultNarration(Category.Name),
                     Lines =
                     [

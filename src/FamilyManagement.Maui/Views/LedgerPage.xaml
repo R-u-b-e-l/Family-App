@@ -29,7 +29,8 @@
             </Grid>
         </VerticalStackLayout>
 
-        <Border Grid.Row="1" Style="{StaticResource Card}" Padding="14,10" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+        <Border Grid.Row="1" Style="{StaticResource Card}" Padding="14,10"
+                IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
             <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="4">
                 <Label Text="{Binding Report.OpeningBalance, Converter={StaticResource Money}, StringFormat='Opening: {0}'}"
                        Style="{StaticResource MutedText}" />

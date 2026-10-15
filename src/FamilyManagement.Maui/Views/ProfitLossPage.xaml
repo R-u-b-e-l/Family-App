@@ -24,7 +24,7 @@
                         WidthRequest="60" Command="{Binding GenerateCommand}" />
             </Grid>
 
-            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
                 <VerticalStackLayout Spacing="4">
                     <Label Text="Net Result" Style="{StaticResource MutedText}" />
                     <Label Text="{Binding Report.NetProfit, Converter={StaticResource Money}}" FontSize="26"
@@ -41,7 +41,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
                 <VerticalStackLayout Spacing="6">
                     <Label Text="Income" Style="{StaticResource SectionTitle}" TextColor="{StaticResource Success}" />
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Report.IncomeLines}" Spacing="4">
@@ -67,7 +67,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
                 <VerticalStackLayout Spacing="6">
                     <Label Text="Expenses" Style="{StaticResource SectionTitle}" TextColor="{StaticResource Danger}" />
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Report.ExpenseLines}" Spacing="4">

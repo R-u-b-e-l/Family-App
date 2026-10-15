@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.MemberManagePage"
+             x:DataType="vm:MemberManageViewModel"
+             Style="{StaticResource AppPage}"
+             Title="{Binding Title}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,12,20,24" Spacing="12">
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="{Binding Member.FullName}" Style="{StaticResource SectionTitle}" />
+                    <Label Text="{Binding Member.UserName, StringFormat='@{0}'}" Style="{StaticResource MutedText}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Roles -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Roles (কে কী করতে পারবে)" Style="{StaticResource SectionTitle}" />
+                    <Label Text="Manager দিলে লেনদেনের সব ক্ষমতা পাবে। Voucher বানানোর অনুমতি role-এর Voucher.Create permission-এ নিয়ন্ত্রিত।"
+                           Style="{StaticResource MutedText}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Roles}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MemberManageViewModel+RoleCheckVm">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+                                    <CheckBox IsChecked="{Binding IsChecked}" Color="{StaticResource Primary}" />
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
+                                        <Label Text="{Binding Role.Name}" Style="{StaticResource BodyText}" />
+                                        <Label Text="{Binding Role.Description}" Style="{StaticResource MutedText}" FontSize="11"
+                                               LineBreakMode="TailTruncation" MaxLines="1" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                    <Button Text="Role সেভ করুন" Style="{StaticResource OutlineButton}" Command="{Binding SaveRolesCommand}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Status -->
+            <Border Style="{StaticResource Card}">
+                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                    <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                        <Label Text="Account সক্রিয়" Style="{StaticResource SectionTitle}" />
+                        <Label Text="বন্ধ করলে member আর login করতে পারবে না" Style="{StaticResource MutedText}" />
+                    </VerticalStackLayout>
+                    <Switch Grid.Column="1" IsToggled="{Binding IsActive}" OnColor="{StaticResource Primary}"
+                            VerticalOptions="Center" />
+                    <Button Grid.Column="2" Text="সেভ" Style="{StaticResource OutlineButton}" HeightRequest="40"
+                            Command="{Binding SaveStatusCommand}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Password reset -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Password Reset" Style="{StaticResource SectionTitle}" />
+                    <Border Style="{StaticResource InputWrap}">
+                        <Entry Text="{Binding NewPassword}" IsPassword="True" Placeholder="নতুন password (কমপক্ষে ৮ অক্ষর, ১ সংখ্যা)" />
+                    </Border>
+                    <Button Text="Password বদলে দিন" Style="{StaticResource OutlineButton}"
+                            Command="{Binding ResetPasswordCommand}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

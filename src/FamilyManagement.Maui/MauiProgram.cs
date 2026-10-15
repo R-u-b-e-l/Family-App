@@ -35,6 +35,13 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterViewModel>();
         builder.Services.AddTransient<ForgotPasswordViewModel>();
         builder.Services.AddTransient<DashboardViewModel>();
+        builder.Services.AddTransient<MyDashboardViewModel>();
+        builder.Services.AddTransient<LoansViewModel>();
+        builder.Services.AddTransient<LoanDetailViewModel>();
+        builder.Services.AddTransient<LoanEntryViewModel>();
+        builder.Services.AddTransient<RolesViewModel>();
+        builder.Services.AddTransient<RoleEditViewModel>();
+        builder.Services.AddTransient<MemberManageViewModel>();
         builder.Services.AddTransient<AccountsViewModel>();
         builder.Services.AddTransient<AccountEntryViewModel>();
         builder.Services.AddTransient<VouchersViewModel>();
@@ -59,6 +66,14 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterPage>();
         builder.Services.AddTransient<ForgotPasswordPage>();
         builder.Services.AddTransient<DashboardPage>();
+        builder.Services.AddTransient<MyDashboardPage>();
+        builder.Services.AddTransient<MemberStatementPage>();
+        builder.Services.AddTransient<LoansPage>();
+        builder.Services.AddTransient<LoanDetailPage>();
+        builder.Services.AddTransient<LoanEntryPage>();
+        builder.Services.AddTransient<RolesPage>();
+        builder.Services.AddTransient<RoleEditPage>();
+        builder.Services.AddTransient<MemberManagePage>();
         builder.Services.AddTransient<AccountsPage>();
         builder.Services.AddTransient<AccountEntryPage>();
         builder.Services.AddTransient<VouchersPage>();

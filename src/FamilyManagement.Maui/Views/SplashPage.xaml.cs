@@ -32,6 +32,16 @@ public partial class SplashPage : ContentPage
 
         MoneyConverter.Symbol = CurrencySymbol(_session.Currency);
 
+        // Android 13+ needs the user's consent before notifications can appear.
+        try
+        {
+            await Permissions.RequestAsync<Permissions.PostNotifications>();
+        }
+        catch
+        {
+            // Older Android or denied — the app works fine without it.
+        }
+
         if (!await _tokens.HasSessionAsync())
         {
             await Shell.Current.GoToAsync("//login");
@@ -48,6 +58,7 @@ public partial class SplashPage : ContentPage
             return;
         }
 
+        AppShell.ApplySession(_session);
         await Shell.Current.GoToAsync("//main");
     }
 

@@ -112,6 +112,65 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- Member contributions -->
+                <Border Style="{StaticResource Card}" Padding="16,12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Member-দের হিসাব (দিয়েছে / খরচ)" Style="{StaticResource SectionTitle}" Margin="0,0,0,6" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding MemberContributions}">
+                            <BindableLayout.EmptyView>
+                                <Label Text="এখনো কোনো member-tagged লেনদেন নেই।" Style="{StaticResource MutedText}"
+                                       Margin="0,8" HorizontalOptions="Center" />
+                            </BindableLayout.EmptyView>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="dto:MemberContributionDto">
+                                    <Grid ColumnDefinitions="*,Auto,Auto" Padding="0,7" ColumnSpacing="14">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding OpenMemberCommand, Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}}"
+                                                CommandParameter="{Binding .}" />
+                                        </Grid.GestureRecognizers>
+                                        <Label Text="{Binding MemberName}" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                                        <Label Grid.Column="1" Text="{Binding Contribution, StringFormat='+{0:N0}'}"
+                                               TextColor="{StaticResource Success}" FontSize="13" VerticalOptions="Center" />
+                                        <Label Grid.Column="2" Text="{Binding Expense, StringFormat='-{0:N0}'}"
+                                               TextColor="{StaticResource Danger}" FontSize="13" VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Loans overview -->
+                <Border Style="{StaticResource Card}" Padding="16,12">
+                    <VerticalStackLayout Spacing="2">
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenLoansCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Label Text="💳 Loan — কার কত বাকি" Style="{StaticResource SectionTitle}" />
+                            <Label Grid.Column="1" Text="সব দেখুন ›" Style="{StaticResource MutedText}" VerticalOptions="Center"
+                                   TextColor="{StaticResource Primary}" />
+                        </Grid>
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding LoanSummaries}">
+                            <BindableLayout.EmptyView>
+                                <Label Text="কোনো loan চলমান নেই।" Style="{StaticResource MutedText}"
+                                       Margin="0,8" HorizontalOptions="Center" />
+                            </BindableLayout.EmptyView>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="dto:LoanSummaryDto">
+                                    <Grid ColumnDefinitions="*,Auto" Padding="0,7">
+                                        <Label Text="{Binding MemberName}" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                                        <Label Grid.Column="1" Text="{Binding Outstanding, Converter={StaticResource Money}}"
+                                               TextColor="{StaticResource Warning}" FontFamily="OpenSansSemibold"
+                                               FontSize="13" VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Recent transactions -->
                 <Border Style="{StaticResource Card}" Padding="16,12">
                     <VerticalStackLayout Spacing="2">

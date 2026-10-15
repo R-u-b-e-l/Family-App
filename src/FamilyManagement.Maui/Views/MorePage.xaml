@@ -37,6 +37,35 @@
             <!-- Navigation -->
             <Border Style="{StaticResource Card}" Padding="6,2">
                 <VerticalStackLayout>
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,13" ColumnSpacing="12">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenLoansCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="💳" FontSize="18" />
+                        <Label Grid.Column="1" Text="Loans (ঋণের হিসাব)" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource MutedText}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,13" ColumnSpacing="12"
+                          IsVisible="{Binding CanViewAccounts}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenAccountsCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="🧮" FontSize="18" />
+                        <Label Grid.Column="1" Text="Chart of Accounts" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource MutedText}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" IsVisible="{Binding CanViewAccounts}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,13" ColumnSpacing="12"
+                          IsVisible="{Binding CanManageRoles}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenRolesCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="🛡️" FontSize="18" />
+                        <Label Grid.Column="1" Text="Roles &amp; Permissions" Style="{StaticResource BodyText}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource MutedText}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" IsVisible="{Binding CanManageRoles}" />
                     <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,13" ColumnSpacing="12"
                           IsVisible="{Binding CanManageMembers}">
                         <Grid.GestureRecognizers>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             x:Class="FamilyManagement.Maui.Views.RoleEditPage"
+             x:DataType="vm:RoleEditViewModel"
+             Style="{StaticResource AppPage}"
+             Title="{Binding Title}">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="20,12" Spacing="4">
+
+                <Label Text="Role-এর নাম" Style="{StaticResource FieldLabel}" />
+                <Border Style="{StaticResource InputWrap}">
+                    <Entry Text="{Binding Name}" Placeholder="যেমন: Accountant"
+                           IsEnabled="{Binding IsSystemRole, Converter={StaticResource InverseBool}}" />
+                </Border>
+
+                <Label Text="বিবরণ" Style="{StaticResource FieldLabel}" />
+                <Border Style="{StaticResource InputWrap}">
+                    <Entry Text="{Binding Description}" Placeholder="এই role-টা কী করতে পারবে"
+                           IsEnabled="{Binding IsSystemRole, Converter={StaticResource InverseBool}}" />
+                </Border>
+
+                <Border Style="{StaticResource Card}" Padding="12,10" BackgroundColor="{StaticResource Secondary}"
+                        IsVisible="{Binding IsAdminRole}" Margin="0,8,0,0">
+                    <Label Text="FamilyAdmin সবসময় সব permission রাখে — এটা বদলানো যায় না।"
+                           FontSize="12.5" TextColor="{StaticResource SecondaryDarkText}" />
+                </Border>
+
+                <Label Text="Permissions" Style="{StaticResource SectionTitle}" Margin="4,14,0,4" />
+                <Border Style="{StaticResource Card}" Padding="12,6">
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Permissions}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:PermissionItemVm">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Group}" Style="{StaticResource MutedText}"
+                                           FontFamily="OpenSansSemibold" Margin="4,10,0,2"
+                                           IsVisible="{Binding IsFirstOfGroup}" />
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6">
+                                        <CheckBox IsChecked="{Binding IsChecked}" Color="{StaticResource Primary}"
+                                                  IsEnabled="{Binding CanEditPermissions, Source={RelativeSource AncestorType={x:Type vm:RoleEditViewModel}}}" />
+                                        <Label Grid.Column="1" Text="{Binding Code}" Style="{StaticResource BodyText}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </Border>
+                <BoxView HeightRequest="8" Color="Transparent" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="12,0,12,10" Padding="16,10"
+                IsVisible="{Binding IsAdminRole, Converter={StaticResource InverseBool}}">
+            <Button Text="✓ সেভ করুন" Style="{StaticResource PrimaryButton}" Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+        </Border>
+    </Grid>
+</ContentPage>

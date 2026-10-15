@@ -13,6 +13,8 @@ public partial class DashboardViewModel(ApiClient api, Session session, LocalCac
     [ObservableProperty] private DashboardSummaryDto _summary = new();
     [ObservableProperty] private List<MonthlyAmountDto> _monthly = [];
     [ObservableProperty] private List<CategoryAmountDto> _expenseCategories = [];
+    [ObservableProperty] private List<MemberContributionDto> _memberContributions = [];
+    [ObservableProperty] private List<LoanSummaryDto> _loanSummaries = [];
     [ObservableProperty] private string _greeting = "Welcome";
     [ObservableProperty] private string _familyName = "";
 
@@ -45,6 +47,9 @@ public partial class DashboardViewModel(ApiClient api, Session session, LocalCac
             Monthly = await api.GetMonthlyIncomeExpenseAsync(6);
             ExpenseCategories = await api.GetExpenseByCategoryAsync();
 
+            MemberContributions = await api.GetMemberContributionsAsync();
+            LoanSummaries = await api.GetLoanSummariesAsync();
+
             var recent = await api.GetRecentTransactionsAsync(8);
             RecentTransactions.Clear();
             foreach (var tx in recent)
@@ -62,6 +67,16 @@ public partial class DashboardViewModel(ApiClient api, Session session, LocalCac
 
     [RelayCommand]
     private Task NewVoucherAsync() => Shell.Current.GoToAsync("quick-voucher");
+
+    [RelayCommand]
+    private Task OpenLoansAsync() => Shell.Current.GoToAsync("loans");
+
+    [RelayCommand]
+    private async Task OpenMemberAsync(MemberContributionDto? member)
+    {
+        if (member is not null)
+            await Shell.Current.GoToAsync($"member-statement?memberId={member.MemberId}");
+    }
 
     [RelayCommand]
     private Task OpenNotificationsAsync() => Shell.Current.GoToAsync("notifications");

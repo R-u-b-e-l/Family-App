@@ -52,6 +52,17 @@ public class SaveVoucherRequestValidator : AbstractValidator<SaveVoucherRequest>
     }
 }
 
+public class LoanTransactionRequestValidator : AbstractValidator<LoanTransactionRequest>
+{
+    public LoanTransactionRequestValidator()
+    {
+        RuleFor(x => x.MemberId).NotEmpty();
+        RuleFor(x => x.MoneyAccountId).NotEmpty();
+        RuleFor(x => x.Amount).GreaterThan(0).WithMessage("Amount must be greater than zero.");
+        RuleFor(x => x.Narration).MaximumLength(500);
+    }
+}
+
 public class SaveVoucherLineRequestValidator : AbstractValidator<SaveVoucherLineRequest>
 {
     public SaveVoucherLineRequestValidator()

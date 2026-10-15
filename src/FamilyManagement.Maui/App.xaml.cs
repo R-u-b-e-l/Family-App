@@ -2,6 +2,9 @@ namespace FamilyManagement.Maui;
 
 public partial class App : Application
 {
+    /// <summary>True while the user has the app on screen; the background poller skips then.</summary>
+    public static bool IsInForeground { get; private set; }
+
     public App()
     {
         InitializeComponent();
@@ -15,5 +18,13 @@ public partial class App : Application
         };
     }
 
-    protected override Window CreateWindow(IActivationState? activationState) => new(new AppShell());
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        var window = new Window(new AppShell());
+        window.Resumed += (_, _) => IsInForeground = true;
+        window.Activated += (_, _) => IsInForeground = true;
+        window.Deactivated += (_, _) => IsInForeground = false;
+        window.Stopped += (_, _) => IsInForeground = false;
+        return window;
+    }
 }

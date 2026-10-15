@@ -47,6 +47,12 @@ public static class PermissionCodes
     public const string SettingsView = "Settings.View";
     public const string SettingsEdit = "Settings.Edit";
 
+    public const string LoanView = "Loan.View";
+    public const string LoanCreate = "Loan.Create";
+
+    /// <summary>The family-wide dashboard. Admin-only by design.</summary>
+    public const string DashboardAdmin = "Dashboard.Admin";
+
     /// <summary>All codes grouped by module — single source for seeding and for admin UI.</summary>
     public static readonly IReadOnlyDictionary<string, string[]> Groups = new Dictionary<string, string[]>
     {
@@ -60,6 +66,9 @@ public static class PermissionCodes
         ["Reports"] = [LedgerView, CashBookView, BankBookView, TrialBalanceView, BalanceSheetView, ProfitLossView, ReportsView],
         ["AuditLog"] = [AuditLogView],
         ["Settings"] = [SettingsView, SettingsEdit],
+        // New groups are appended only — permission ids are positional and must stay stable.
+        ["Loan"] = [LoanView, LoanCreate],
+        ["AdminDashboard"] = [DashboardAdmin],
     };
 
     public static IEnumerable<string> All => Groups.Values.SelectMany(x => x);

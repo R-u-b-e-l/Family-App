@@ -204,11 +204,13 @@ public partial class BalanceSheetViewModel(ApiClient api) : BaseViewModel
 {
     [ObservableProperty] private DateTime _asOf = DateTime.Today;
     [ObservableProperty] private BalanceSheetDto? _report;
+    [ObservableProperty] private decimal _liabilitiesPlusEquity;
 
     [RelayCommand]
     private Task GenerateAsync() => RunAsync(async () =>
     {
         Report = await api.GetBalanceSheetAsync(DateOnly.FromDateTime(AsOf));
+        LiabilitiesPlusEquity = Report.TotalLiabilities + Report.TotalEquity;
     });
 
     [RelayCommand]

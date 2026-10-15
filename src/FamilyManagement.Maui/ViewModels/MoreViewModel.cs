@@ -15,6 +15,8 @@ public partial class MoreViewModel(ApiClient api, Session session, LocalCache ca
 
     public bool CanManageMembers => session.Can(PermissionCodes.MemberView);
     public bool CanEditSettings => session.Can(PermissionCodes.SettingsView);
+    public bool CanViewAccounts => session.Can(PermissionCodes.AccountView);
+    public bool CanManageRoles => session.Can(PermissionCodes.RoleManage);
 
     [RelayCommand]
     private void Load()
@@ -29,6 +31,8 @@ public partial class MoreViewModel(ApiClient api, Session session, LocalCache ca
         ServerUrl = ApiClient.ServerUrl;
         OnPropertyChanged(nameof(CanManageMembers));
         OnPropertyChanged(nameof(CanEditSettings));
+        OnPropertyChanged(nameof(CanViewAccounts));
+        OnPropertyChanged(nameof(CanManageRoles));
     }
 
     partial void OnThemeIndexChanged(int value)
@@ -69,6 +73,15 @@ public partial class MoreViewModel(ApiClient api, Session session, LocalCache ca
 
     [RelayCommand]
     private Task OpenNotificationsAsync() => Shell.Current.GoToAsync("notifications");
+
+    [RelayCommand]
+    private Task OpenAccountsAsync() => Shell.Current.GoToAsync("accounts");
+
+    [RelayCommand]
+    private Task OpenLoansAsync() => Shell.Current.GoToAsync("loans");
+
+    [RelayCommand]
+    private Task OpenRolesAsync() => Shell.Current.GoToAsync("roles");
 
     [RelayCommand]
     private async Task SignOutAsync()

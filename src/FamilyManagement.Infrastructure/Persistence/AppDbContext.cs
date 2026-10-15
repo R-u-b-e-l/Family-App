@@ -117,6 +117,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUser c
             e.Property(a => a.Description).HasMaxLength(500);
             e.HasIndex(a => new { a.FamilyId, a.Code }).IsUnique();
             e.HasIndex(a => new { a.FamilyId, a.ParentAccountId });
+            e.HasIndex(a => new { a.FamilyId, a.LinkedMemberId });
             e.HasOne(a => a.Parent).WithMany(a => a.Children).HasForeignKey(a => a.ParentAccountId).OnDelete(DeleteBehavior.Restrict);
         });
 
@@ -134,6 +135,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUser c
             e.HasIndex(v => new { v.FamilyId, v.VoucherNumber }).IsUnique();
             e.HasIndex(v => new { v.FamilyId, v.VoucherDate, v.Status });
             e.HasIndex(v => new { v.FamilyId, v.VoucherType, v.Status });
+            e.HasIndex(v => new { v.FamilyId, v.MemberId });
             e.HasOne(v => v.Period).WithMany().HasForeignKey(v => v.PeriodId).OnDelete(DeleteBehavior.Restrict);
             e.HasOne(v => v.ReversalOfVoucher).WithMany().HasForeignKey(v => v.ReversalOfVoucherId).OnDelete(DeleteBehavior.Restrict);
             e.HasMany(v => v.Details).WithOne(d => d.Voucher).HasForeignKey(d => d.VoucherId).OnDelete(DeleteBehavior.Cascade);

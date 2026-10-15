@@ -17,6 +17,8 @@ public class Account : AuditableEntity, ITenantEntity
     public bool IsActive { get; set; } = true;
     /// <summary>Inherited from the parent at creation; drives Cash Book / Bank Book membership.</summary>
     public CashBankKind CashBankKind { get; set; } = CashBankKind.None;
+    /// <summary>Set on per-member loan accounts; the account tracks that member's loan.</summary>
+    public Guid? LinkedMemberId { get; set; }
     public int Level { get; set; }
     public string? Description { get; set; }
 

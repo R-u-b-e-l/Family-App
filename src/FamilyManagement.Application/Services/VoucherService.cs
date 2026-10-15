@@ -62,7 +62,8 @@ public class VoucherService(
                 Narration = v.Narration,
                 Amount = v.TotalDebit,
                 Status = v.Status,
-                CreatedByName = db.Users.Where(u => u.Id == v.CreatedBy).Select(u => u.FullName).FirstOrDefault() ?? ""
+                CreatedByName = db.Users.Where(u => u.Id == v.CreatedBy).Select(u => u.FullName).FirstOrDefault() ?? "",
+                MemberName = db.Users.Where(u => u.Id == v.MemberId).Select(u => u.FullName).FirstOrDefault()
             })
             .ToListAsync(ct);
 
@@ -89,6 +90,8 @@ public class VoucherService(
                 CreatedDate = v.CreatedDate,
                 PostedByName = db.Users.Where(u => u.Id == v.PostedBy).Select(u => u.FullName).FirstOrDefault(),
                 PostedDate = v.PostedDate,
+                MemberId = v.MemberId,
+                MemberName = db.Users.Where(u => u.Id == v.MemberId).Select(u => u.FullName).FirstOrDefault(),
                 Lines = v.Details.OrderBy(d => d.LineNo).Select(d => new VoucherLineDto
                 {
                     Id = d.Id,
@@ -110,6 +113,7 @@ public class VoucherService(
     {
         var period = await ResolvePeriodAsync(request.VoucherDate, ct);
         await ValidateLinesAsync(request, ct);
+        await ValidateMemberAsync(request.MemberId, ct);
 
         var voucher = new Voucher
         {
@@ -118,6 +122,7 @@ public class VoucherService(
             VoucherDate = request.VoucherDate,
             PeriodId = period.Id,
             Narration = request.Narration?.Trim(),
+            MemberId = request.MemberId,
             Status = VoucherStatus.Draft,
             CreatedBy = currentUser.UserId,
             CreatedDate = clock.UtcNow
@@ -143,11 +148,13 @@ public class VoucherService(
 
         var period = await ResolvePeriodAsync(request.VoucherDate, ct);
         await ValidateLinesAsync(request, ct);
+        await ValidateMemberAsync(request.MemberId, ct);
 
         voucher.VoucherType = request.VoucherType;
         voucher.VoucherDate = request.VoucherDate;
         voucher.PeriodId = period.Id;
         voucher.Narration = request.Narration?.Trim();
+        voucher.MemberId = request.MemberId;
         voucher.UpdatedBy = currentUser.UserId;
         voucher.UpdatedDate = clock.UtcNow;
 
@@ -272,6 +279,7 @@ public class VoucherService(
                             (string.IsNullOrWhiteSpace(original.Narration) ? "" : $" — {original.Narration}"),
                 Status = VoucherStatus.Posted,
                 ReversalOfVoucherId = original.Id,
+                MemberId = original.MemberId,
                 CreatedBy = currentUser.UserId,
                 CreatedDate = clock.UtcNow,
                 PostedBy = currentUser.UserId,
@@ -330,6 +338,16 @@ public class VoucherService(
         }
         voucher.TotalDebit = voucher.Details.Sum(d => d.Debit);
         voucher.TotalCredit = voucher.Details.Sum(d => d.Credit);
+    }
+
+    private async Task ValidateMemberAsync(Guid? memberId, CancellationToken ct)
+    {
+        if (memberId is null)
+            return;
+        // Tenant filter on Users guarantees the member belongs to this family.
+        var exists = await db.Users.AsNoTracking().AnyAsync(u => u.Id == memberId, ct);
+        if (!exists)
+            throw new BadRequestException("The selected member was not found.");
     }
 
     private async Task<AccountingPeriod> ResolvePeriodAsync(DateOnly voucherDate, CancellationToken ct) =>

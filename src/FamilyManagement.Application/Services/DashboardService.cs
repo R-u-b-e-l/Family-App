@@ -14,6 +14,8 @@ public interface IDashboardService
     Task<List<CategoryAmountDto>> GetExpenseByCategoryAsync(DateOnly? from, DateOnly? to, CancellationToken ct = default);
     Task<List<CategoryAmountDto>> GetIncomeByCategoryAsync(DateOnly? from, DateOnly? to, CancellationToken ct = default);
     Task<List<RecentTransactionDto>> GetRecentTransactionsAsync(int count, CancellationToken ct = default);
+    /// <summary>Per-member contribution vs expense totals (member-tagged vouchers).</summary>
+    Task<List<MemberContributionDto>> GetMemberContributionsAsync(CancellationToken ct = default);
 }
 
 public class DashboardService(
@@ -172,6 +174,40 @@ public class DashboardService(
             Category = r.Name,
             Amount = r.Net
         }).ToList();
+    }
+
+    public async Task<List<MemberContributionDto>> GetMemberContributionsAsync(CancellationToken ct = default)
+    {
+        var rows = await PostedDetails
+            .Where(d => d.Voucher!.MemberId != null
+                        && (d.Account!.AccountType == AccountType.Income || d.Account.AccountType == AccountType.Expense))
+            .GroupBy(d => new { d.Voucher!.MemberId, d.Account!.AccountType })
+            .Select(g => new
+            {
+                MemberId = g.Key.MemberId!.Value,
+                g.Key.AccountType,
+                Debit = g.Sum(x => x.Debit),
+                Credit = g.Sum(x => x.Credit)
+            })
+            .ToListAsync(ct);
+
+        var memberIds = rows.Select(r => r.MemberId).Distinct().ToList();
+        var names = await db.Users.AsNoTracking()
+            .Where(u => memberIds.Contains(u.Id))
+            .Select(u => new { u.Id, u.FullName })
+            .ToListAsync(ct);
+
+        return memberIds.Select(id => new MemberContributionDto
+        {
+            MemberId = id,
+            MemberName = names.FirstOrDefault(n => n.Id == id)?.FullName ?? "Unknown",
+            Contribution = rows.Where(r => r.MemberId == id && r.AccountType == AccountType.Income)
+                .Sum(r => r.Credit - r.Debit),
+            Expense = rows.Where(r => r.MemberId == id && r.AccountType == AccountType.Expense)
+                .Sum(r => r.Debit - r.Credit)
+        })
+        .OrderByDescending(m => m.Contribution)
+        .ToList();
     }
 
     public async Task<List<RecentTransactionDto>> GetRecentTransactionsAsync(int count, CancellationToken ct = default)

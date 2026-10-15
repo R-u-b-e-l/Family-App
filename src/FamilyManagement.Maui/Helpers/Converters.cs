@@ -78,6 +78,16 @@ public class InverseBoolConverter : IValueConverter
         value is bool b && !b;
 }
 
+/// <summary>Object → bool for IsVisible: true when the bound value is non-null (and non-empty for strings).</summary>
+public class IsNotNullConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        value is string s ? !string.IsNullOrWhiteSpace(s) : value is not null;
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
+}
+
 public class ZeroToEmptyConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>

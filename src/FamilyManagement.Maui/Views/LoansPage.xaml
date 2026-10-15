@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             x:Class="FamilyManagement.Maui.Views.LoansPage"
+             x:DataType="vm:LoansViewModel"
+             Style="{StaticResource AppPage}"
+             Title="Loans">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16,8,16,12" RowSpacing="10">
+
+        <Border Style="{StaticResource Card}" BackgroundColor="{StaticResource Primary}">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="মোট বাকি Loan (Outstanding)" TextColor="#CDEDE3" FontSize="13" />
+                <Label Text="{Binding TotalOutstanding, Converter={StaticResource Money}}"
+                       TextColor="White" FontSize="26" FontFamily="OpenSansSemibold" />
+            </VerticalStackLayout>
+        </Border>
+
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadCommand}"
+                     RefreshColor="{StaticResource Primary}">
+            <CollectionView ItemsSource="{Binding Summaries}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Margin="0,40" Spacing="8">
+                        <Label Text="💳" FontSize="40" HorizontalOptions="Center" />
+                        <Label Text="কোনো loan নেই" Style="{StaticResource SectionTitle}" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:LoanSummaryDto">
+                        <Grid Padding="0,3">
+                            <Border Style="{StaticResource Card}" Padding="14,10">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding OpenStatementCommand, Source={RelativeSource AncestorType={x:Type vm:LoansViewModel}}}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="{Binding MemberName}" Style="{StaticResource BodyText}"
+                                               FontFamily="OpenSansSemibold" />
+                                        <Label Style="{StaticResource MutedText}">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="নিয়েছে {0:N2} · শোধ {1:N2}">
+                                                    <Binding Path="TotalTaken" />
+                                                    <Binding Path="TotalRepaid" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="1" HorizontalOptions="End">
+                                        <Label Text="বাকি" Style="{StaticResource MutedText}" HorizontalOptions="End" />
+                                        <Label Text="{Binding Outstanding, Converter={StaticResource Money}}"
+                                               Style="{StaticResource BodyText}" FontFamily="OpenSansSemibold"
+                                               TextColor="{StaticResource Warning}" HorizontalOptions="End" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding CanManage}">
+            <Button Text="💸 Loan দিন" Style="{StaticResource PrimaryButton}" Command="{Binding GiveLoanCommand}" />
+            <Button Grid.Column="1" Text="💰 ফেরত নিন" Style="{StaticResource OutlineButton}" HeightRequest="50"
+                    Command="{Binding RepayLoanCommand}" />
+        </Grid>
+    </Grid>
+</ContentPage>

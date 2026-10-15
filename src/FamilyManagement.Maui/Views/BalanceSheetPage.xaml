@@ -21,7 +21,7 @@
                         WidthRequest="60" Command="{Binding GenerateCommand}" />
             </Grid>
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
                 <Border Style="{StaticResource StatCard}">
                     <VerticalStackLayout Spacing="2">
                         <Label Text="Total Assets" Style="{StaticResource MutedText}" />
@@ -32,18 +32,19 @@
                 <Border Grid.Column="1" Style="{StaticResource StatCard}">
                     <VerticalStackLayout Spacing="2">
                         <Label Text="Liabilities + Equity" Style="{StaticResource MutedText}" />
-                        <Label Style="{StaticResource AmountText}" FontSize="17">
-                            <Label.Text>
-                                <MultiBinding StringFormat="{}{0:N2}">
-                                    <Binding Path="Report.TotalLiabilities" />
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
+                        <Label Text="{Binding LiabilitiesPlusEquity, Converter={StaticResource Money}}"
+                               Style="{StaticResource AmountText}" FontSize="17" />
                     </VerticalStackLayout>
                 </Border>
             </Grid>
 
-            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Border Style="{StaticResource Card}" Padding="12,10" BackgroundColor="{StaticResource Secondary}"
+                    IsVisible="{Binding Report.IsBalanced, FallbackValue=False}">
+                <Label Text="✓ Assets = Liabilities + Equity — হিসাব মিলেছে" FontSize="12.5"
+                       TextColor="{StaticResource SecondaryDarkText}" />
+            </Border>
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
                 <VerticalStackLayout Spacing="6">
                     <Label Text="Assets" Style="{StaticResource SectionTitle}" />
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Report.AssetLines}" Spacing="4">
@@ -65,7 +66,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
                 <VerticalStackLayout Spacing="6">
                     <Label Text="Liabilities" Style="{StaticResource SectionTitle}" />
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Report.LiabilityLines}" Spacing="4">
@@ -90,7 +91,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, TargetNullValue=False, FallbackValue=False}">
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Report, Converter={StaticResource IsNotNull}}">
                 <VerticalStackLayout Spacing="6">
                     <Label Text="Equity" Style="{StaticResource SectionTitle}" />
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Report.EquityLines}" Spacing="4">

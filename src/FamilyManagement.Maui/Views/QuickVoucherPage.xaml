@@ -87,6 +87,12 @@
                 </Border>
             </VerticalStackLayout>
 
+            <Label Text="কার লেনদেন? (Member)" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource InputWrap}" Padding="8,0">
+                <Picker ItemsSource="{Binding Members}" SelectedItem="{Binding SelectedMember}"
+                        ItemDisplayBinding="{Binding FullName}" Title="Member বেছে নিন…" />
+            </Border>
+
             <Label Text="তারিখ (Date)" Style="{StaticResource FieldLabel}" />
             <Border Style="{StaticResource InputWrap}" Padding="8,0">
                 <DatePicker Date="{Binding Date}" />

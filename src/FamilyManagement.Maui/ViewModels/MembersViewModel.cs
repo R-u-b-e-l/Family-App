@@ -42,6 +42,22 @@ public partial class MembersViewModel(ApiClient api, Session session) : BaseView
 
     [RelayCommand]
     private Task AddMemberAsync() => Shell.Current.GoToAsync("member-entry");
+
+    public bool CanManage => session.Can(PermissionCodes.RoleManage);
+
+    [RelayCommand]
+    private async Task OpenStatementAsync(UserDto? member)
+    {
+        if (member is not null)
+            await Shell.Current.GoToAsync($"member-statement?memberId={member.Id}");
+    }
+
+    [RelayCommand]
+    private async Task ManageAsync(UserDto? member)
+    {
+        if (member is not null)
+            await Shell.Current.GoToAsync($"member-manage?memberId={member.Id}");
+    }
 }
 
 public partial class MemberEntryViewModel(ApiClient api) : BaseViewModel

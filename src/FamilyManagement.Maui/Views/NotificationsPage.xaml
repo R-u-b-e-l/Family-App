@@ -31,7 +31,7 @@
                                     <Label Text="{Binding Title}" Style="{StaticResource BodyText}"
                                            FontFamily="OpenSansSemibold" />
                                     <Label Text="{Binding Body}" Style="{StaticResource MutedText}"
-                                           IsVisible="{Binding Body, TargetNullValue=False, FallbackValue=False}" />
+                                           IsVisible="{Binding Body, Converter={StaticResource IsNotNull}}" />
                                     <Label Text="{Binding CreatedDate, StringFormat='{0:dd MMM yyyy, hh:mm tt}'}"
                                            Style="{StaticResource MutedText}" FontSize="11" />
                                 </VerticalStackLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FamilyManagement.Maui.ViewModels"
+             xmlns:dto="clr-namespace:FamilyManagement.Shared.Dtos;assembly=FamilyManagement.Shared"
+             xmlns:controls="clr-namespace:FamilyManagement.Maui.Controls"
+             x:Class="FamilyManagement.Maui.Views.LoanDetailPage"
+             x:DataType="vm:LoanDetailViewModel"
+             Style="{StaticResource AppPage}"
+             Title="{Binding Statement.MemberName, StringFormat='Loan — {0}'}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="📄 PDF" Command="{Binding DownloadPdfCommand}" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout Padding="16,12,16,24" Spacing="12">
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Border Style="{StaticResource StatCard}">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="নিয়েছে" Style="{StaticResource MutedText}" />
+                        <Label Text="{Binding Statement.TotalTaken, StringFormat='{0:N0}'}"
+                               Style="{StaticResource AmountText}" FontSize="16" TextColor="{StaticResource Danger}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource StatCard}">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="শোধ করেছে" Style="{StaticResource MutedText}" />
+                        <Label Text="{Binding Statement.TotalRepaid, StringFormat='{0:N0}'}"
+                               Style="{StaticResource AmountText}" FontSize="16" TextColor="{StaticResource Success}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource StatCard}">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="বাকি" Style="{StaticResource MutedText}" />
+                        <Label Text="{Binding Statement.Outstanding, StringFormat='{0:N0}'}"
+                               Style="{StaticResource AmountText}" FontSize="16" TextColor="{StaticResource Warning}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                        <Label Text="মাসভিত্তিক চিত্র (১২ মাস)" Style="{StaticResource SectionTitle}" />
+                        <HorizontalStackLayout Grid.Column="1" Spacing="4">
+                            <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="2"
+                                     Color="{StaticResource Success}" VerticalOptions="Center" />
+                            <Label Text="শোধ" Style="{StaticResource MutedText}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Column="2" Spacing="4">
+                            <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="2"
+                                     Color="{StaticResource Danger}" VerticalOptions="Center" />
+                            <Label Text="নিয়েছে" Style="{StaticResource MutedText}" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                    <controls:BarChartView ItemsSource="{Binding Statement.Monthly}"
+                                           LabelColor="{AppThemeBinding Light={StaticResource TextMutedLight}, Dark={StaticResource TextMutedDark}}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Padding="16,12">
+                <VerticalStackLayout Spacing="4">
+                    <Grid ColumnDefinitions="*,70,70,80" Margin="0,0,0,4">
+                        <Label Text="লেনদেন" Style="{StaticResource MutedText}" FontFamily="OpenSansSemibold" />
+                        <Label Grid.Column="1" Text="নিল" Style="{StaticResource MutedText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                        <Label Grid.Column="2" Text="শোধ" Style="{StaticResource MutedText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                        <Label Grid.Column="3" Text="বাকি" Style="{StaticResource MutedText}" FontFamily="OpenSansSemibold" HorizontalOptions="End" />
+                    </Grid>
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Rows}" Spacing="6">
+                        <BindableLayout.EmptyView>
+                            <Label Text="কোনো লেনদেন নেই।" Style="{StaticResource MutedText}" Margin="0,10"
+                                   HorizontalOptions="Center" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="dto:LedgerRowDto">
+                                <Grid ColumnDefinitions="*,70,70,80">
+                                    <VerticalStackLayout Spacing="0">
+                                        <Label Text="{Binding Date, Converter={StaticResource DateOnlyFormat}}"
+                                               Style="{StaticResource BodyText}" FontSize="13" />
+                                        <Label Text="{Binding Narration}" Style="{StaticResource MutedText}" FontSize="11"
+                                               LineBreakMode="TailTruncation" MaxLines="1" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" Text="{Binding Debit, Converter={StaticResource ZeroToEmpty}}"
+                                           TextColor="{StaticResource Danger}" FontSize="13" HorizontalOptions="End" VerticalOptions="Center" />
+                                    <Label Grid.Column="2" Text="{Binding Credit, Converter={StaticResource ZeroToEmpty}}"
+                                           TextColor="{StaticResource Success}" FontSize="13" HorizontalOptions="End" VerticalOptions="Center" />
+                                    <Label Grid.Column="3" Text="{Binding RunningBalance, StringFormat='{0:N0}'}"
+                                           Style="{StaticResource BodyText}" FontSize="13" HorizontalOptions="End" VerticalOptions="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

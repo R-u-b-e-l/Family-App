@@ -13,9 +13,11 @@ public static class SeedData
 {
     public static readonly Guid AdminTemplateRoleId = Guid.Parse("11111111-1111-1111-1111-111111111111");
     public static readonly Guid MemberTemplateRoleId = Guid.Parse("22222222-2222-2222-2222-222222222222");
+    public static readonly Guid ManagerTemplateRoleId = Guid.Parse("33333333-3333-3333-3333-333333333333");
 
     public const string FamilyAdminRoleName = "FamilyAdmin";
     public const string FamilyMemberRoleName = "FamilyMember";
+    public const string ManagerRoleName = "Manager";
 
     /// <summary>View-level permissions granted to the FamilyMember template.</summary>
     public static readonly string[] MemberTemplatePermissions =
@@ -30,6 +32,39 @@ public static class SeedData
         PermissionCodes.BankBookView,
         PermissionCodes.ReportsView,
         PermissionCodes.SettingsView,
+    ];
+
+    /// <summary>
+    /// Manager template: every day-to-day money permission (accounts, vouchers incl. post/approve,
+    /// all reports, loans) — but no member/role/settings administration and no admin dashboard.
+    /// </summary>
+    public static readonly string[] ManagerTemplatePermissions =
+    [
+        PermissionCodes.DashboardView,
+        PermissionCodes.FamilyView,
+        PermissionCodes.MemberView,
+        PermissionCodes.AccountView,
+        PermissionCodes.AccountCreate,
+        PermissionCodes.AccountEdit,
+        PermissionCodes.AccountDelete,
+        PermissionCodes.PeriodView,
+        PermissionCodes.PeriodManage,
+        PermissionCodes.VoucherView,
+        PermissionCodes.VoucherCreate,
+        PermissionCodes.VoucherEdit,
+        PermissionCodes.VoucherDelete,
+        PermissionCodes.VoucherPost,
+        PermissionCodes.VoucherApprove,
+        PermissionCodes.LedgerView,
+        PermissionCodes.CashBookView,
+        PermissionCodes.BankBookView,
+        PermissionCodes.TrialBalanceView,
+        PermissionCodes.BalanceSheetView,
+        PermissionCodes.ProfitLossView,
+        PermissionCodes.ReportsView,
+        PermissionCodes.SettingsView,
+        PermissionCodes.LoanView,
+        PermissionCodes.LoanCreate,
     ];
 
     /// <summary>Stable permission ids: position in the PermissionCodes catalog (1-based).</summary>
@@ -67,13 +102,25 @@ public static class SeedData
                 Description = "Read-only family member (template).",
                 IsSystem = true,
                 ConcurrencyStamp = "seed-member-template"
+            },
+            new AppRole
+            {
+                Id = ManagerTemplateRoleId,
+                FamilyId = null,
+                Name = ManagerRoleName,
+                NormalizedName = ManagerRoleName.ToUpperInvariant(),
+                Description = "Handles all money matters: vouchers, accounts, loans, reports (template).",
+                IsSystem = true,
+                ConcurrencyStamp = "seed-manager-template"
             });
 
         var adminPermissions = permissions
             .Select(p => new RolePermission { RoleId = AdminTemplateRoleId, PermissionId = p.Id });
         var memberPermissions = MemberTemplatePermissions
             .Select(code => new RolePermission { RoleId = MemberTemplateRoleId, PermissionId = PermissionIds[code] });
+        var managerPermissions = ManagerTemplatePermissions
+            .Select(code => new RolePermission { RoleId = ManagerTemplateRoleId, PermissionId = PermissionIds[code] });
 
-        builder.Entity<RolePermission>().HasData(adminPermissions.Concat(memberPermissions));
+        builder.Entity<RolePermission>().HasData(adminPermissions.Concat(memberPermissions).Concat(managerPermissions));
     }
 }

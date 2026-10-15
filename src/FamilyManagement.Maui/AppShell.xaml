@@ -13,11 +13,11 @@
     <ShellContent Route="login" ContentTemplate="{DataTemplate views:LoginPage}" Shell.NavBarIsVisible="False" />
 
     <TabBar Route="main">
-        <Tab Title="Dashboard" Icon="tab_dashboard.png">
+        <Tab x:Name="AdminTab" Title="Dashboard" Icon="tab_dashboard.png">
             <ShellContent Route="dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" />
         </Tab>
-        <Tab Title="Accounts" Icon="tab_accounts.png">
-            <ShellContent Route="accounts" ContentTemplate="{DataTemplate views:AccountsPage}" />
+        <Tab Title="My" Icon="tab_my.png">
+            <ShellContent Route="my-dashboard" ContentTemplate="{DataTemplate views:MyDashboardPage}" />
         </Tab>
         <Tab Title="Vouchers" Icon="tab_vouchers.png">
             <ShellContent Route="vouchers" ContentTemplate="{DataTemplate views:VouchersPage}" />

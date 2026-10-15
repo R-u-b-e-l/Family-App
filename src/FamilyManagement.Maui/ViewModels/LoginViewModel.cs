@@ -45,6 +45,7 @@ public partial class LoginViewModel(ApiClient api, Session session) : BaseViewMo
 
         MoneyConverter.Symbol = SplashPage.CurrencySymbol(session.Currency);
         Password = string.Empty;
+        AppShell.ApplySession(session);
         await Shell.Current.GoToAsync("//main");
     });
 

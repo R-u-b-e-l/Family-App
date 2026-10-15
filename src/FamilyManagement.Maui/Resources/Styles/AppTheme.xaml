@@ -10,6 +10,7 @@
     <helpers:VoucherTypeColorConverter x:Key="VoucherTypeColor" />
     <helpers:DateOnlyConverter x:Key="DateOnlyFormat" />
     <helpers:InverseBoolConverter x:Key="InverseBool" />
+    <helpers:IsNotNullConverter x:Key="IsNotNull" />
     <helpers:ZeroToEmptyConverter x:Key="ZeroToEmpty" />
 
     <!-- Brand palette (overrides the template's purple) -->

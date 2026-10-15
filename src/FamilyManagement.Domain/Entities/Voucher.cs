@@ -16,6 +16,8 @@ public class Voucher : AuditableEntity, ITenantEntity
     public VoucherStatus Status { get; set; } = VoucherStatus.Draft;
     /// <summary>Set on the mirror voucher that reverses a posted voucher.</summary>
     public Guid? ReversalOfVoucherId { get; set; }
+    /// <summary>Optional member attribution: who contributed / spent / took the loan.</summary>
+    public Guid? MemberId { get; set; }
     public Guid? PostedBy { get; set; }
     public DateTime? PostedDate { get; set; }
     public byte[] RowVersion { get; set; } = [];

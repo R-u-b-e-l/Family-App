@@ -52,6 +52,8 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="14.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
+		<PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.19.0.1" />
+		<PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.11.2.1" />
 	</ItemGroup>
 
 	<ItemGroup>

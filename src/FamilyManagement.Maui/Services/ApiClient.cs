@@ -87,6 +87,8 @@ public class ApiClient(TokenStore tokens, Session session)
     {
         await tokens.SaveAsync(auth.AccessToken, auth.RefreshToken);
         session.Start(auth);
+        // Only notifications created after this sign-in should pop on the phone.
+        Preferences.Default.Set("fm_notif_last_ticks", DateTime.UtcNow.Ticks);
     }
 
     // ---- typed endpoints ------------------------------------------------------
@@ -179,6 +181,64 @@ public class ApiClient(TokenStore tokens, Session session)
 
     public Task<List<RoleDto>> GetRolesAsync(CancellationToken ct = default) =>
         GetAsync<List<RoleDto>>("/roles", ct);
+
+    public Task<RoleDto> CreateRoleAsync(CreateRoleRequest request, CancellationToken ct = default) =>
+        PostAsync<CreateRoleRequest, RoleDto>("/roles", request, true, ct);
+
+    public Task<RoleDto> UpdateRoleAsync(Guid roleId, UpdateRoleRequest request, CancellationToken ct = default) =>
+        PutAsync<UpdateRoleRequest, RoleDto>($"/roles/{roleId}", request, ct);
+
+    public Task UpdateRolePermissionsAsync(Guid roleId, UpdateRolePermissionsRequest request, CancellationToken ct = default) =>
+        PutAsync<UpdateRolePermissionsRequest, object?>($"/roles/{roleId}/permissions", request, ct);
+
+    public Task DeleteRoleAsync(Guid roleId, CancellationToken ct = default) =>
+        DeleteAsync($"/roles/{roleId}", ct);
+
+    public Task<List<PermissionDto>> GetPermissionCatalogAsync(CancellationToken ct = default) =>
+        GetAsync<List<PermissionDto>>("/permissions", ct);
+
+    public Task<UserDto> GetMemberAsync(Guid memberId, CancellationToken ct = default) =>
+        GetAsync<UserDto>($"/users/{memberId}", ct);
+
+    public Task AssignRolesAsync(Guid memberId, AssignRolesRequest request, CancellationToken ct = default) =>
+        PutAsync<AssignRolesRequest, object?>($"/users/{memberId}/roles", request, ct);
+
+    public Task SetMemberStatusAsync(Guid memberId, UpdateMemberStatusRequest request, CancellationToken ct = default) =>
+        SendAsync<object?>(HttpMethod.Patch, $"/users/{memberId}/status", request, true, ct);
+
+    public Task AdminResetPasswordAsync(Guid memberId, AdminResetPasswordRequest request, CancellationToken ct = default) =>
+        PostAsync<AdminResetPasswordRequest, object?>($"/users/{memberId}/reset-password", request, true, ct);
+
+    // ---- loans ---------------------------------------------------------------
+
+    public Task<List<LoanSummaryDto>> GetLoanSummariesAsync(CancellationToken ct = default) =>
+        GetAsync<List<LoanSummaryDto>>("/loans", ct);
+
+    public Task<LoanStatementDto> GetLoanStatementAsync(Guid memberId, int page = 1, int pageSize = 50, CancellationToken ct = default) =>
+        GetAsync<LoanStatementDto>($"/loans/{memberId}/statement?page={page}&pageSize={pageSize}", ct);
+
+    public Task<LoanSummaryDto> GiveLoanAsync(LoanTransactionRequest request, CancellationToken ct = default) =>
+        PostAsync<LoanTransactionRequest, LoanSummaryDto>("/loans/give", request, true, ct);
+
+    public Task<LoanSummaryDto> RepayLoanAsync(LoanTransactionRequest request, CancellationToken ct = default) =>
+        PostAsync<LoanTransactionRequest, LoanSummaryDto>("/loans/repay", request, true, ct);
+
+    // ---- member statement ------------------------------------------------------
+
+    public Task<MemberStatementDto> GetMemberStatementAsync(Guid memberId, CancellationToken ct = default) =>
+        GetAsync<MemberStatementDto>($"/member-statement/{memberId}", ct);
+
+    public Task<List<MonthlyAmountDto>> GetMemberMonthlyAsync(Guid memberId, int months = 6, CancellationToken ct = default) =>
+        GetAsync<List<MonthlyAmountDto>>($"/member-statement/{memberId}/monthly?months={months}", ct);
+
+    public Task<List<CategoryAmountDto>> GetMemberExpenseCategoriesAsync(Guid memberId, CancellationToken ct = default) =>
+        GetAsync<List<CategoryAmountDto>>($"/member-statement/{memberId}/expense-categories", ct);
+
+    public Task<PagedResult<VoucherListItemDto>> GetMemberTransactionsAsync(Guid memberId, int page = 1, int pageSize = 20, CancellationToken ct = default) =>
+        GetAsync<PagedResult<VoucherListItemDto>>($"/member-statement/{memberId}/transactions?page={page}&pageSize={pageSize}", ct);
+
+    public Task<List<MemberContributionDto>> GetMemberContributionsAsync(CancellationToken ct = default) =>
+        GetAsync<List<MemberContributionDto>>("/dashboard/member-contributions", ct);
 
     public Task<UserDto> GetProfileAsync(CancellationToken ct = default) =>
         GetAsync<UserDto>("/profile", ct);

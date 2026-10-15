@@ -64,6 +64,9 @@ namespace FamilyManagement.Infrastructure.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("LinkedMemberId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -87,6 +90,8 @@ namespace FamilyManagement.Infrastructure.Migrations
 
                     b.HasIndex("FamilyId", "Code")
                         .IsUnique();
+
+                    b.HasIndex("FamilyId", "LinkedMemberId");
 
                     b.HasIndex("FamilyId", "ParentAccountId");
 
@@ -199,6 +204,15 @@ namespace FamilyManagement.Infrastructure.Migrations
                             IsSystem = true,
                             Name = "FamilyMember",
                             NormalizedName = "FAMILYMEMBER"
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            ConcurrencyStamp = "seed-manager-template",
+                            Description = "Handles all money matters: vouchers, accounts, loans, reports (template).",
+                            IsSystem = true,
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
                         });
                 });
 
@@ -726,6 +740,24 @@ namespace FamilyManagement.Infrastructure.Migrations
                             Id = 31,
                             Code = "Settings.Edit",
                             Group = "Settings"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Code = "Loan.View",
+                            Group = "Loan"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Code = "Loan.Create",
+                            Group = "Loan"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Code = "Dashboard.Admin",
+                            Group = "AdminDashboard"
                         });
                 });
 
@@ -945,6 +977,21 @@ namespace FamilyManagement.Infrastructure.Migrations
                         },
                         new
                         {
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            PermissionId = 32
+                        },
+                        new
+                        {
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            PermissionId = 33
+                        },
+                        new
+                        {
+                            RoleId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            PermissionId = 34
+                        },
+                        new
+                        {
                             RoleId = new Guid("22222222-2222-2222-2222-222222222222"),
                             PermissionId = 1
                         },
@@ -992,6 +1039,131 @@ namespace FamilyManagement.Infrastructure.Migrations
                         {
                             RoleId = new Guid("22222222-2222-2222-2222-222222222222"),
                             PermissionId = 30
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 1
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 2
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 4
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 10
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 11
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 12
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 13
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 14
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 15
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 16
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 17
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 18
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 19
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 20
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 21
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 22
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 23
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 24
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 25
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 26
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 27
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 28
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 30
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 32
+                        },
+                        new
+                        {
+                            RoleId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = 33
                         });
                 });
 
@@ -1008,6 +1180,9 @@ namespace FamilyManagement.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("FamilyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("MemberId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Narration")
@@ -1065,6 +1240,8 @@ namespace FamilyManagement.Infrastructure.Migrations
                     b.HasIndex("PeriodId");
 
                     b.HasIndex("ReversalOfVoucherId");
+
+                    b.HasIndex("FamilyId", "MemberId");
 
                     b.HasIndex("FamilyId", "VoucherNumber")
                         .IsUnique();
