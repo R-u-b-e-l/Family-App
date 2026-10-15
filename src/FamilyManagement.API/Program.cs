@@ -11,6 +11,7 @@ using FamilyManagement.Infrastructure;
 using FamilyManagement.Infrastructure.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -32,6 +33,14 @@ try
     QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
     // ---- layers ------------------------------------------------------------
+    // Behind a reverse proxy (Render, Caddy) the original scheme/IP arrive in X-Forwarded-* headers.
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        options.KnownIPNetworks.Clear();
+        options.KnownProxies.Clear();
+    });
+
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddScoped<ICurrentUser, CurrentUser>();
     builder.Services.AddApplication();
@@ -160,6 +169,7 @@ try
     }
 
     // ---- pipeline -------------------------------------------------------------
+    app.UseForwardedHeaders();
     app.UseSerilogRequestLogging();
     app.UseMiddleware<ExceptionHandlingMiddleware>();
 

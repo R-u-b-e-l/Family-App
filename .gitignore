@@ -56,3 +56,7 @@ Desktop.ini
 *.tmp
 node_modules/
 .sass-cache/
+
+
+appsettings.Development.json
+appsettings.Local.json
